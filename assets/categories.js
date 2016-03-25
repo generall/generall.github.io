@@ -9567,7 +9567,7 @@ $(function () {
       .attr("width", width)
       .attr("height", height);
 
-    d3.json("/api/graph", function(error, graph) {
+    d3.json("/api/graph.json", function(error, graph) {
       if (error) throw error;
 
       force

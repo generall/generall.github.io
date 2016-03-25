@@ -14,7 +14,7 @@
   <script src="/assets/application.js" data-turbolinks-track="true"></script>
 <script src="/assets/records.js" data-turbolinks-track="true"></script>
   <meta name="csrf-param" content="authenticity_token" />
-<meta name="csrf-token" content="MuXblhA9WnHNJllOL8x/MbHPw5LhXJJxhp3xzg80K2uHUFtisr37ECKuW0I3j+0EwkizKTOKyUiEOv5RMSaLig==" />
+<meta name="csrf-token" content="1tftH0IaUFMOoyRxqVDbpc4DcQJXVaCbwFY/m5y03Qw5NOQbNhgnAJp+6jXM8TDYr2FsbQl4ZyUg9aECrEFcGA==" />
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 </head>
 <body>
