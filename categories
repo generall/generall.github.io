@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <link rel="stylesheet" media="all" href="/assets/application.css" data-turbolinks-track="true" />
+  <link rel="stylesheet" media="all" href="/assets/application.css" data-turbolinks-track="true" />
+<link rel="stylesheet" media="all" href="/assets/categories.css" data-turbolinks-track="true" />
+  <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="windows-1251"></script>
+  <!--%= javascript_include_tag 'application', 'data-turbolinks-track' => true %-->
+  <script src="/assets/application.js" data-turbolinks-track="true"></script>
+<script src="/assets/categories.js" data-turbolinks-track="true"></script>
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="zxGHZ+BBqRX/x0GGFVleNam/TFN+hxvQdR1OTNnBRmeKuIh5DNYCBQHizoYm/48yoxzPAis/WSwcxy32yBYjog==" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+</head>
+<body>
+
+<div class="graph"></div>
+
+
+</body>
+</html>

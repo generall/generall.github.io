@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <link rel="stylesheet" media="all" href="/assets/application.css" data-turbolinks-track="true" />
+  <link rel="stylesheet" media="all" href="/assets/application.css" data-turbolinks-track="true" />
+<link rel="stylesheet" media="all" href="/assets/records.css" data-turbolinks-track="true" />
+  <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="windows-1251"></script>
+  <!--%= javascript_include_tag 'application', 'data-turbolinks-track' => true %-->
+  <script src="/assets/application.js" data-turbolinks-track="true"></script>
+<script src="/assets/records.js" data-turbolinks-track="true"></script>
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="UnNehqJblrYR1cFI+FQZ1b6oEaTsqqyc4X2coFaSjHYX2lGYTsw9pu/wTkjL8sjStAuS9bkS7mCIp/8aR0Xpsw==" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+</head>
+<body>
+
+<div class="toTop"></div>   
+<div class="catehory-gtaph js-popup">
+  <div class="close"></div>
+  <div></div>
+</div>
+<div class="wrapper">
+  <header class="js-header" id="header">
+    <a href="/categories" class="category fancybox fancybox.ajax">Категории</a>
+    <p class="logo">COMPREHENSION.ML</p>
+    <a class="tomain" href="/about">Обо мне</a>
+  </header>
+  <div class="page">
+    <div class="welcom">
+      <div class="h1">Блог о машинном обучении, математике и скептицизме.</div>
+      <p class="welcom-text">В этом блоге публикуются заметки про машинное обучение, анализ и визуализацию данных. В постах я стараюсь рассказать про нетривиальные для меня вопросы, с которыми мне пришлось столкнуться в работе и исследованиях. Кроме того, в записях можно найти статьи по теме критического мышления, скептицизма и обзор философских проблем с точки зрения математики.</p>
+    </div>
+    <div class="articles-prev">
+      <div class="vline">
+        <section class="ap-item">
+          <a href="/records/onus-probandi">
+            <div class="ap-img">
+              <img src="/img/shked.jpg" alt="">
+            </div>
+            <div class="ap-text">
+              <p class="h2">Onus probandi</p>
+              <p>Если вы наткнулись на записи из этого блога составив для поисковой машины запрос, содержащий такие слова как «скептицизм», «теория», «доказательство» (на что я искренне надеюсь), то вам наверняка знакомы возражения ваших оппонентов в споре, которые можно обобщить до фразы «Сперва докажи что Х не верно».</p>
+            </div>
+          </a>
+          <time class="date"> 2014-11-15</time>
+        </section>
+      </div>
+      <div class="vline">
+        <section class="ap-item">
+          <a href="/records/lex-parsimoniae">
+            <div class="ap-img">
+              <img src="http://knife.kasumi.ru/upload/medialibrary/13b/britva1.jpg" alt="">
+            </div>
+            <div class="ap-text">
+              <p class="h2">lex parsimoniae</p>
+              <p>По результатам встречи Общества Скептиков от 11.12.2014</p>
+            </div>
+          </a>
+          <time class="date"> 2014-12-12</time>
+        </section>
+      </div>
+      <div class="vline">
+        <section class="ap-item">
+          <a href="/records/heap-paradox-solvation">
+            <div class="ap-img">
+              <img src="http://chtooznachaet.ru/wp-content/uploads/2014/08/%D0%92%D1%80%D0%B5%D0%BC%D1%8F-%D1%81%D0%BE%D0%B1%D0%B8%D1%80%D0%B0%D1%82%D1%8C-%D0%BA%D0%B0%D0%BC%D0%BD%D0%B8.jpg" alt="">
+            </div>
+            <div class="ap-text">
+              <p class="h2">Heap paradox solvation</p>
+              <p>В стандартной постановке парадокс кучи камней формулируется следующим образом: какого количества камней, сложенных вместе, будет достаточно для того, чтобы считать эти камни кучей.</p>
+            </div>
+          </a>
+          <time class="date"> 2014-12-25</time>
+        </section>
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+    <section class="follow-me">
+          <a href="https://github.com/generall" class="g-hub" target="_blank"></a> 
+          <a href="https://twitter.com/vasnetsov93" class="twitter" target="_blank"></a>
+          <a href="https://ru.linkedin.com/in/андрей-васнецов-75268897" class="linkedin" target="_blank"></a> 
+    </section>
+    <section class="f-logo">
+      <img src="/assets/logo.png" alt="">
+    </section>
+    <section class="copy"><a href="about.html">Андрей Васнецов</a> &copy; 2016</section>
+  </footer>
+</div> 
+
+
+
+</body>
+</html>

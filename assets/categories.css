@@ -1,0 +1,25 @@
+/* line 6, /home/generall/Dropbox/dev/blog/app/assets/stylesheets/categories.scss */
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+/* line 11, /home/generall/Dropbox/dev/blog/app/assets/stylesheets/categories.scss */
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+/* line 16, /home/generall/Dropbox/dev/blog/app/assets/stylesheets/categories.scss */
+.graph {
+  height: 420px;
+  width: 420px;
+  background-color: #FFF;
+}
+
+/* line 23, /home/generall/Dropbox/dev/blog/app/assets/stylesheets/categories.scss */
+.node:hover {
+  cursor: pointer;
+  stroke: #222;
+  stroke-width: 0.5px;
+}
