@@ -10,7 +10,7 @@
   <script src="/assets/application.js" data-turbolinks-track="true"></script>
 <script src="/assets/records.js" data-turbolinks-track="true"></script>
   <meta name="csrf-param" content="authenticity_token" />
-<meta name="csrf-token" content="/oKJO75u6JweqTaQjFYUaacPOwVY8B7rGx5rhKAxy727K4YlUvlDjOCMuZC/8MVuray4VA1IXBdyxAg+seaueA==" />
+<meta name="csrf-token" content="xhXNvsM42lcyVawUMPTtDGW+8BqMIRyd5LWXVB97eNKvHxxZmMOB3URD9vVmzstSp8raXkW7GysbyvDlOVZPEw==" />
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 </head>
 <body>
@@ -19,7 +19,7 @@
 <div class="toTop"></div> 
 <div class="wrapper">
   <header id="header" class="js-header">
-    <a href="/categories" class="category fancybox fancybox.ajax">Категории</a>
+    <a href="/categories.html" class="category fancybox fancybox.ajax">Категории</a>
     <p class="logo">Обо мне</p>
     <a href="/" class="tomain">Главная</a>
   </header>
