@@ -3,6 +3,10 @@
 <head>
   <title>Blog</title>
   <link rel="stylesheet" media="all" href="/assets/application.css" data-turbolinks-track="true" />
+<link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,300italic,300" data-turbolinks-track="true" />
+  <link rel="stylesheet" media="all" href="/assets/application.css" data-turbolinks-track="true" />
+<link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Anonymous+Pro&amp;subset=latin-ext,cyrillic" data-turbolinks-track="true" />
+  <link rel="stylesheet" media="all" href="/assets/application.css" data-turbolinks-track="true" />
   <link rel="stylesheet" media="all" href="/assets/application.css" data-turbolinks-track="true" />
 <link rel="stylesheet" media="all" href="/assets/records.css" data-turbolinks-track="true" />
   <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="windows-1251"></script>
@@ -10,7 +14,7 @@
   <script src="/assets/application.js" data-turbolinks-track="true"></script>
 <script src="/assets/records.js" data-turbolinks-track="true"></script>
   <meta name="csrf-param" content="authenticity_token" />
-<meta name="csrf-token" content="xhXNvsM42lcyVawUMPTtDGW+8BqMIRyd5LWXVB97eNKvHxxZmMOB3URD9vVmzstSp8raXkW7GysbyvDlOVZPEw==" />
+<meta name="csrf-token" content="MuXblhA9WnHNJllOL8x/MbHPw5LhXJJxhp3xzg80K2uHUFtisr37ECKuW0I3j+0EwkizKTOKyUiEOv5RMSaLig==" />
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 </head>
 <body>
@@ -53,6 +57,10 @@
     </section>
     <section class="copy"><a href="about.html">Андрей Васнецов</a> &copy; 2016</section>
   </footer> 
+</div>
+
+<div style="display: none;">
+  <a href="/api/graph.json">link to API to be downloaded by wget ;)</a>
 </div>
 
 
