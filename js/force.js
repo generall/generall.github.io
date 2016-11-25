@@ -5,6 +5,8 @@ $(function () {
     var width = 900,
     height = 400;
 
+    $(".sknn_animation").empty()
+
     var svg = d3.select(".sknn_animation").append("svg")
       .attr("width", width)
       .attr("height", height);
