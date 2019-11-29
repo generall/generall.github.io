@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+<meta name="description" content="Personal blog about Neural Networks, NLP and Software Engineering.">
+<meta name="keywords" content="NLP, neural networks, pytorch, telegram, engineering, ML, fasttext, simaes networks, BERT, transformer, word2vec, deploy, allennlp, blog">
+
+
+<script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "http:\/\/comprehension.ml\/"
+      },
+      "articleSection" : "posts",
+      "name" : "Partially trainable embeddings",
+      "headline" : "Partially trainable embeddings",
+      "description" : "A simple tip how to control overfitting and learnability if your data is not too large.",
+      "inLanguage" : "en-US",
+      "author" : "Andrey Vasnetsov",
+      "creator" : "Andrey Vasnetsov",
+      "publisher": "Andrey Vasnetsov",
+      "accountablePerson" : "Andrey Vasnetsov",
+      "copyrightHolder" : "Andrey Vasnetsov",
+      "copyrightYear" : "2019",
+      "datePublished": "2019-11-10 23:52:52 \x2b0300 MSK",
+      "dateModified" : "2019-11-10 23:52:52 \x2b0300 MSK",
+      "url" : "http:\/\/comprehension.ml\/posts\/partial-embeddings\/",
+      "wordCount" : "248",
+      "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
+  }
+</script>
+
+        <title>Partially trainable embeddings</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="http://comprehension.ml/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokailight.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/json.min.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.60.0" />
+        
+
+        
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56301881-3"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments)};
+              gtag('js', new Date());
+              gtag('config', 'UA-56301881-3');
+            </script>
+        
+
+        
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    processEscapes: true
+                }
+                });
+            </script>
+            <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+
+        
+
+    </head>
+
+    <body>
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">Partially trainable embeddings</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="http://comprehension.ml/">Home</a></li>
+                            
+                                <li><a href="http://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
+                            
+                                <li><a href="http://comprehension.ml/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:vasnetsov93&#43;blog@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/generall"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://t.me/neural_network_engineering"><i class="fa fa-telegram"></i></a></li>
+                            
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+    
+        <div>
+            <h2>Partially trainable embeddings</h2>
+            <h5>November 10, 2019</h5>
+            
+
+        </div>
+
+        <div align="start" class="content"><p><img src="http://comprehension.ml/img/partially_trainable_embeddings.png" alt="image"></p>
+<p>Understanding the meaning of natural language require a huge amount of information to be arranged by a neural network.
+And the largest part if this information is usually stored in word embeddings.</p>
+<p>Typically, labeled data from a particular task is not enough to train so many parameters. Thus, word embeddings are trained separately on a large general-purpose corpora.</p>
+<p>But there are some cases when we want to be able to train word embeddings in our custom task, for example:</p>
+<ul>
+<li>We have a specific domain with a non-standard terminology or sentence structure</li>
+<li>We want to use additional markup like <code>&lt;tags&gt;</code> in our task</li>
+</ul>
+<p>In these cases, we need to update a small number of weights, responsible for new words and meanings. At the same time, we can't update pre-trained embeddings cause it will lead to very quick overfitting.</p>
+<p>To deal with this problem partially trainable embeddings were used in this project.
+The idea is to concatenate fixed pre-trained embeddings with additional small trainable embeddings. It is also useful to add a linear layer right after concatenation so embeddings could interact during training.
+Changing the size of an additional embedding gives control over the number of parameters and, as a result, allows to prevent overfitting.</p>
+<p>Another good thing is that AllenNLP allows implementing this technique without a single line of code but with just a simple configuration:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#111">{</span>
+  <span style="color:#f92672">&#34;token_embedders&#34;</span><span style="color:#111">:</span> <span style="color:#111">{</span>
+    <span style="color:#f92672">&#34;tokens-ngram&#34;</span><span style="color:#111">:</span> <span style="color:#111">{</span>
+      <span style="color:#f92672">&#34;type&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;fasttext-embedder&#34;</span><span style="color:#111">,</span>
+      <span style="color:#f92672">&#34;model_path&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;./data/fasttext_embedding.model&#34;</span><span style="color:#111">,</span>
+      <span style="color:#f92672">&#34;trainable&#34;</span><span style="color:#111">:</span> <span style="color:#00a8c8">false</span>
+    <span style="color:#111">}</span><span style="color:#111">,</span>
+    <span style="color:#f92672">&#34;tokens&#34;</span><span style="color:#111">:</span> <span style="color:#111">{</span>
+      <span style="color:#f92672">&#34;type&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;embedding&#34;</span><span style="color:#111">,</span>
+      <span style="color:#f92672">&#34;embedding_dim&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">20</span><span style="color:#111">,</span>
+      <span style="color:#f92672">&#34;trainable&#34;</span><span style="color:#111">:</span> <span style="color:#00a8c8">true</span>
+    <span style="color:#111">}</span>
+  <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div></div>
+
+        
+        
+        
+
+        
+        
+    
+</main>
+
+        <footer>
+            <p class="copyright text-muted">© All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a>.</p>
+        </footer>
+
+        
+
+        
+    </body>
+
+</html>
+

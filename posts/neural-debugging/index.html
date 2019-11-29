@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+<meta name="description" content="Personal blog about Neural Networks, NLP and Software Engineering.">
+<meta name="keywords" content="NLP, neural networks, pytorch, telegram, engineering, ML, fasttext, simaes networks, BERT, transformer, word2vec, deploy, allennlp, blog">
+
+
+<script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "http:\/\/comprehension.ml\/"
+      },
+      "articleSection" : "posts",
+      "name" : "Neural Networks debugging",
+      "headline" : "Neural Networks debugging",
+      "description" : "How to be sure that the source of errors is not the code but the network architecture? How to determine limits in architecture capacity?",
+      "inLanguage" : "en-US",
+      "author" : "Andrey Vasnetsov",
+      "creator" : "Andrey Vasnetsov",
+      "publisher": "Andrey Vasnetsov",
+      "accountablePerson" : "Andrey Vasnetsov",
+      "copyrightHolder" : "Andrey Vasnetsov",
+      "copyrightYear" : "2018",
+      "datePublished": "2018-06-30 01:51:34 \x2b0300 MSK",
+      "dateModified" : "2018-06-30 01:51:34 \x2b0300 MSK",
+      "url" : "http:\/\/comprehension.ml\/posts\/neural-debugging\/",
+      "wordCount" : "652",
+      "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
+  }
+</script>
+
+        <title>Neural Networks debugging</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="http://comprehension.ml/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokailight.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/json.min.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.60.0" />
+        
+
+        
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56301881-3"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments)};
+              gtag('js', new Date());
+              gtag('config', 'UA-56301881-3');
+            </script>
+        
+
+        
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    processEscapes: true
+                }
+                });
+            </script>
+            <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+
+        
+
+    </head>
+
+    <body>
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">Neural Networks debugging</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="http://comprehension.ml/">Home</a></li>
+                            
+                                <li><a href="http://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
+                            
+                                <li><a href="http://comprehension.ml/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:vasnetsov93&#43;blog@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/generall"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://t.me/neural_network_engineering"><i class="fa fa-telegram"></i></a></li>
+                            
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+    
+        <div>
+            <h2>Neural Networks debugging</h2>
+            <h5>June 30, 2018</h5>
+            
+
+        </div>
+
+        <div align="start" class="content"><p>When training neural networks it can often be unclear why the network is not learning. Is it about learning parameters or NN architecture?
+Brute force search on full training dataset may be very time consuming even with GPU acceleration.
+If you need to write code on your laptop and run it on remote machine, it makes process even more painful.
+One way to solve this problem is to use synthetic datasets for debugging.</p>
+<p>The idea is to create small sets of examples each of which is a little more complex then previous one.
+Let me illustrate this approach. On picture example we can see that model is able to distinguish:</p>
+<ul>
+<li>Object presence</li>
+<li>Shapes</li>
+<li>Colors</li>
+<li>Rotation</li>
+<li>Stroke</li>
+</ul>
+<p>And it can't distinguish <em>alignment</em> and <em>count</em> of objects. Keep in mind that number of layers and neurons should be scaled down according to the size of synthetic data, or network will overfit. Knowing evaluation results we can quickly iterate over modifications for our network architecture.</p>
+<p><img src="http://comprehension.ml/img/ssyntetic_data.svg.png" alt="Step-by-step examples"></p>
+<p>Of course solving synthetic dataset does not guarantee solving real-life tasks. As well as passing Unit test does not guarantee that code has no bugs.
+But there is another useful thing we can do: with large amount of small experiments we can detect relations between the result and changing of network parameters. This information will help us to concentrate on significant parameters tuning while training on real data.</p>
+<p>Not only images can synthesized for training. In my NEL project I am using 13 synthetic <em>text</em> datasets. Size of this datasets allows me to debug neural network on laptop without any GPU. You can find code its generation <a href="https://github.com/generall/OneShotCDSSM/blob/master/ComplexTopicsGenerator.ipynb">here</a>.
+Writing code for data generation may be time consuming and boring, so the next possible step in NN debugging is to create tools, framework or even language for data generation. With declarative SQL-like language it would be possible to create datasets automatically, for example using some kind of evolution strategy. Unfortunately I was unable to find anything suitable for this task, so it is a good place for you to contribute!</p>
+<p>Practical example.</p>
+<p>Situation: CDSSM model does not learn well on big dataset of natural language sentences. What is our next step?
+Running the model on several synthetic datasets, we notice that CDSSM model is unable to handle the following simple data:
+<code>Each sentence has several of N topic words + random noise words. Two sentences matching only if they have at least one common word.</code></p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Example:
+
+1    ldwjum mugqw sohyp     sohyp dwguv mugqw
+0    ldwjum mugqw sohyp     labhvz epqori kfdo
+1    xnwpjc agqv lmjoh      wvncu tekj lmjoh
+0    xnwpjc agqv lmjoh      jhnt fhzb xauhq
+1    vflcmn pnuvx eolwrj    dhfvbt vflcmn toxeyc
+0    vflcmn pnuvx eolwrj    dhfvbt yetkah bfnxqp
+1    rybmae bwcej xnwpjc    bwcej yrhefk yhca
+0    rybmae bwcej xnwpjc    bhck zbfj yhca
+1    sohyp htdp symc        jrvsyn symc fpoxj
+0    sohyp htdp symc        eolwrj masq hjzrp
+1    dhfvbt yetkah omsaij   omsaij dhfvbt tqdef
+0    dhfvbt yetkah omsaij   zilrh wvncu sohyp
+</code></pre></div><p>CDSSM overfits on this data. The reason is that it is unknown which word will be useful for matching before actual comparison of sentences.
+Withal the final matching layer of CDSSM is unable to hold enough information about each concrete word in original sentence.
+So the only way for network to minimize error is to remember noise in train set. Such behavior is easy to recognize on loss plots.
+Train loss goes down quickly but validation loss grows - typical overfitting (pic 1.).</p>
+<p>One possible way to solve this dataset is to change network architecture to the one that can handle low level interactions between words in sentence pair.
+In previous post I mentioned interaction-focused models, the exact type of models we need. I choose <a href="https://arxiv.org/abs/1503.03244">ARC-II</a> architecture for my experiment, you can check out implementation <a href="https://github.com/generall/OneShotCDSSM/blob/master/src/model/arc2.py">here</a>. New model fits synthetic data perfectly well (pic 2.). As a result we can safely skip time consuming experiments with CDSSM model on real dataset.</p>
+<p><img src="http://comprehension.ml/img/arcii.png" alt="ARC-II Network"></p>
+</div>
+
+        
+        
+        
+
+        
+        
+    
+</main>
+
+        <footer>
+            <p class="copyright text-muted">© All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a>.</p>
+        </footer>
+
+        
+
+        
+    </body>
+
+</html>
+

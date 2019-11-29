@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+<meta name="description" content="Personal blog about Neural Networks, NLP and Software Engineering.">
+<meta name="keywords" content="NLP, neural networks, pytorch, telegram, engineering, ML, fasttext, simaes networks, BERT, transformer, word2vec, deploy, allennlp, blog">
+
+
+<script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "http:\/\/comprehension.ml\/"
+      },
+      "articleSection" : "posts",
+      "name" : "On-Disk Embeddings",
+      "headline" : "On-Disk Embeddings",
+      "description" : "How to use large fastText embeddings if you have low RAM?",
+      "inLanguage" : "en-US",
+      "author" : "Andrey Vasnetsov",
+      "creator" : "Andrey Vasnetsov",
+      "publisher": "Andrey Vasnetsov",
+      "accountablePerson" : "Andrey Vasnetsov",
+      "copyrightHolder" : "Andrey Vasnetsov",
+      "copyrightYear" : "2018",
+      "datePublished": "2018-08-04 01:49:45 \x2b0300 MSK",
+      "dateModified" : "2018-08-04 01:49:45 \x2b0300 MSK",
+      "url" : "http:\/\/comprehension.ml\/posts\/on-disk-fasttext\/",
+      "wordCount" : "390",
+      "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
+  }
+</script>
+
+        <title>On-Disk Embeddings</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="http://comprehension.ml/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokailight.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/json.min.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.60.0" />
+        
+
+        
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56301881-3"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments)};
+              gtag('js', new Date());
+              gtag('config', 'UA-56301881-3');
+            </script>
+        
+
+        
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    processEscapes: true
+                }
+                });
+            </script>
+            <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+
+        
+
+    </head>
+
+    <body>
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">On-Disk Embeddings</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="http://comprehension.ml/">Home</a></li>
+                            
+                                <li><a href="http://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
+                            
+                                <li><a href="http://comprehension.ml/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:vasnetsov93&#43;blog@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/generall"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://t.me/neural_network_engineering"><i class="fa fa-telegram"></i></a></li>
+                            
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+    
+        <div>
+            <h2>On-Disk Embeddings</h2>
+            <h5>August 4, 2018</h5>
+            
+
+        </div>
+
+        <div align="start" class="content"><p>There are some cases when you need to run your model on a small instance.
+For example, if your model is being called 1 time per hour or you just don't want to pay $150 per month to Amazon for t2.2xlarge instance with 32Gb RAM.
+The problem is that the size of most pre-trained word embeddings can reach tens of gigabytes.</p>
+<p>In this post, I will describe the method of access word vectors without loading it into memory.
+The idea is to simply save word vectors as a matrix so that we could compute the position of each row without reading any other rows from disk.</p>
+<p>Fortunately, all this logic is already implemented in <code>numpy.memmap</code>.
+The only thing we need to implement ourselves is the function which converts word into an appropriate index. We can simply store the whole vocabulary in memory or use hashing trick, it does not matter at this point.</p>
+<p>It is slightly harder to store FastText vectors that way because it requires additional computation on n-grams to obtain word vector.
+So for simplicity, we will just pre-compute vectors for all necessary words.</p>
+<p>You may take a look at a simple implementation of the described approach here:
+<a href="https://github.com/generall/OneShotNLP/blob/master/src/utils/disc_vectors.py">https://github.com/generall/OneShotNLP/blob/master/src/utils/disc_vectors.py</a></p>
+<p>Class <code>DiscVectors</code> contains method for converting fastText <code>.bin</code> model into on-disk matrix representation and json file with vocabulary and meta-information.
+Once the model is converted, you can retrieve vectors with <code>get_word_vector</code> method. Performance check shows that in the worst case it takes 20 µs to retrieve single vector, pretty good since we are not using any significant amount of RAM.</p>
+<p><img src="http://comprehension.ml/img/timeit_wv.png" alt="mmap speed"></p>
+<h2 id="bonus-cpu-or-gpu">Bonus: CPU or GPU?</h2>
+<p>If you have enough RAM to store embeddings, but you are still in doubt if it worth to put it on GPU or make your batch a little larger, here are some experiments:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">on_cuda</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">:</span>
+    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">np</span><span style="color:#f92672">.</span><span style="color:#111">random</span><span style="color:#f92672">.</span><span style="color:#111">randint</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#ae81ff">100000</span><span style="color:#111">,</span> <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#ae81ff">100</span><span style="color:#111">,</span> <span style="color:#ae81ff">100</span><span style="color:#111">)</span><span style="color:#111">)</span>
+    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">torch</span><span style="color:#f92672">.</span><span style="color:#111">from_numpy</span><span style="color:#111">(</span><span style="color:#111">batch</span><span style="color:#111">)</span>
+    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">batch</span><span style="color:#f92672">.</span><span style="color:#111">cuda</span><span style="color:#111">(</span><span style="color:#111">)</span>
+    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">emb</span><span style="color:#111">(</span><span style="color:#111">batch</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">batch</span>
+
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">on_cpu</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">:</span>
+    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">np</span><span style="color:#f92672">.</span><span style="color:#111">random</span><span style="color:#f92672">.</span><span style="color:#111">randint</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#ae81ff">100000</span><span style="color:#111">,</span> <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#ae81ff">100</span><span style="color:#111">,</span> <span style="color:#ae81ff">100</span><span style="color:#111">)</span><span style="color:#111">)</span>
+    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">emb_np</span><span style="color:#111">[</span><span style="color:#111">batch</span><span style="color:#111">]</span>
+    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">torch</span><span style="color:#f92672">.</span><span style="color:#111">from_numpy</span><span style="color:#111">(</span><span style="color:#111">batch</span><span style="color:#111">)</span>
+    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">batch</span><span style="color:#f92672">.</span><span style="color:#111">cuda</span><span style="color:#111">(</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">batch</span>
+</code></pre></div><p><img src="http://comprehension.ml/img/gpu_vs_cpu_embeddings.png" alt="GPU vs CPU Embeddings"></p>
+<p>It appears that storing embeddings on GPU is almost 40 times faster than convert them afterwards.
+This is because transferring data across the bus between the RAM and the GPU memory is the bottleneck in this process.
+The less information is transmitted over the slow bus, the faster the whole process as a whole.</p>
+</div>
+
+        
+        
+        
+
+        
+        
+    
+</main>
+
+        <footer>
+            <p class="copyright text-muted">© All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a>.</p>
+        </footer>
+
+        
+
+        
+    </body>
+
+</html>
+

@@ -1,0 +1,4 @@
+One is the representation-focused model, which tries
+to build a good representation for a single text with a deep
+neural network, and then conducts matching between the
+compositional and abstract text representations
