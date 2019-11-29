@@ -16,7 +16,7 @@
       "@type" : "BlogPosting",
       "mainEntityOfPage": {
            "@type": "WebPage",
-           "@id": "http:\/\/comprehension.ml\/"
+           "@id": "https:\/\/comprehension.ml\/"
       },
       "articleSection" : "posts",
       "name" : "FastText embeddings done right",
@@ -31,7 +31,7 @@
       "copyrightYear" : "2018",
       "datePublished": "2018-07-13 01:50:27 \x2b0300 MSK",
       "dateModified" : "2018-07-13 01:50:27 \x2b0300 MSK",
-      "url" : "http:\/\/comprehension.ml\/posts\/embedding-bag\/",
+      "url" : "https:\/\/comprehension.ml\/posts\/embedding-bag\/",
       "wordCount" : "158",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
   }
@@ -54,7 +54,7 @@
 </style>
 
 
-<link rel="stylesheet" href="http://comprehension.ml/css/main.css">
+<link rel="stylesheet" href="https://comprehension.ml/css/main.css">
 
 
 
@@ -139,11 +139,11 @@
                     
                         <ul class="nav navbar-nav">
                             
-                                <li><a href="http://comprehension.ml/">Home</a></li>
+                                <li><a href="https://comprehension.ml/">Home</a></li>
                             
-                                <li><a href="http://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
+                                <li><a href="https://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
                             
-                                <li><a href="http://comprehension.ml/posts/">Posts</a></li>
+                                <li><a href="https://comprehension.ml/posts/">Posts</a></li>
                             
                         </ul>
                     
@@ -177,8 +177,8 @@ In addition to the vocabulary FastText also contains word's ngrams.
 This additional information is useful for the following: handling Out-Of-Vocabulary words, extracting sense from word's etymology and dealing with misspellings.</p>
 <p>But unfortunately all this advantages are not used in most open source projects.
 We can easily discover it via GitHub.</p>
-<p><img src="http://comprehension.ml/img/fasttext_wrong.png" alt="Wrong">
-<img src="http://comprehension.ml/img/fasttext_good.png" alt="Right"></p>
+<p><img src="https://comprehension.ml/img/fasttext_wrong.png" alt="Wrong">
+<img src="https://comprehension.ml/img/fasttext_good.png" alt="Right"></p>
 <p>The point is that regular <code>Embedding</code> layer maps the whole word into a single, stored in memory, fixed vector. In this case all the word vectors should be generated in advance, so none of the cool features work.</p>
 <p>The good thing is that using FastText correctly is not so difficult! FacebookResearch provides an <a href="https://github.com/facebookresearch/fastText/blob/master/python/doc/examples/FastTextEmbeddingBag.py">example</a> of the proper way to use FastText in PyTorch framework.
 Instead of <code>Embedding</code> you should choose <code>EmbeddingBag</code> layer. It will combine ngrams into single word vector which can be used as usual.

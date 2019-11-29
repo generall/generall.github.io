@@ -16,7 +16,7 @@
       "@type" : "BlogPosting",
       "mainEntityOfPage": {
            "@type": "WebPage",
-           "@id": "http:\/\/comprehension.ml\/"
+           "@id": "https:\/\/comprehension.ml\/"
       },
       "articleSection" : "posts",
       "name" : "On-Disk Embeddings",
@@ -31,7 +31,7 @@
       "copyrightYear" : "2018",
       "datePublished": "2018-08-04 01:49:45 \x2b0300 MSK",
       "dateModified" : "2018-08-04 01:49:45 \x2b0300 MSK",
-      "url" : "http:\/\/comprehension.ml\/posts\/on-disk-fasttext\/",
+      "url" : "https:\/\/comprehension.ml\/posts\/on-disk-fasttext\/",
       "wordCount" : "390",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
   }
@@ -54,7 +54,7 @@
 </style>
 
 
-<link rel="stylesheet" href="http://comprehension.ml/css/main.css">
+<link rel="stylesheet" href="https://comprehension.ml/css/main.css">
 
 
 
@@ -139,11 +139,11 @@
                     
                         <ul class="nav navbar-nav">
                             
-                                <li><a href="http://comprehension.ml/">Home</a></li>
+                                <li><a href="https://comprehension.ml/">Home</a></li>
                             
-                                <li><a href="http://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
+                                <li><a href="https://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
                             
-                                <li><a href="http://comprehension.ml/posts/">Posts</a></li>
+                                <li><a href="https://comprehension.ml/posts/">Posts</a></li>
                             
                         </ul>
                     
@@ -185,7 +185,7 @@ So for simplicity, we will just pre-compute vectors for all necessary words.</p>
 <a href="https://github.com/generall/OneShotNLP/blob/master/src/utils/disc_vectors.py">https://github.com/generall/OneShotNLP/blob/master/src/utils/disc_vectors.py</a></p>
 <p>Class <code>DiscVectors</code> contains method for converting fastText <code>.bin</code> model into on-disk matrix representation and json file with vocabulary and meta-information.
 Once the model is converted, you can retrieve vectors with <code>get_word_vector</code> method. Performance check shows that in the worst case it takes 20 µs to retrieve single vector, pretty good since we are not using any significant amount of RAM.</p>
-<p><img src="http://comprehension.ml/img/timeit_wv.png" alt="mmap speed"></p>
+<p><img src="https://comprehension.ml/img/timeit_wv.png" alt="mmap speed"></p>
 <h2 id="bonus-cpu-or-gpu">Bonus: CPU or GPU?</h2>
 <p>If you have enough RAM to store embeddings, but you are still in doubt if it worth to put it on GPU or make your batch a little larger, here are some experiments:</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">on_cuda</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">:</span>
@@ -201,7 +201,7 @@ Once the model is converted, you can retrieve vectors with <code>get_word_vector
     <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">torch</span><span style="color:#f92672">.</span><span style="color:#111">from_numpy</span><span style="color:#111">(</span><span style="color:#111">batch</span><span style="color:#111">)</span>
     <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">batch</span><span style="color:#f92672">.</span><span style="color:#111">cuda</span><span style="color:#111">(</span><span style="color:#111">)</span>
     <span style="color:#00a8c8">return</span> <span style="color:#111">batch</span>
-</code></pre></div><p><img src="http://comprehension.ml/img/gpu_vs_cpu_embeddings.png" alt="GPU vs CPU Embeddings"></p>
+</code></pre></div><p><img src="https://comprehension.ml/img/gpu_vs_cpu_embeddings.png" alt="GPU vs CPU Embeddings"></p>
 <p>It appears that storing embeddings on GPU is almost 40 times faster than convert them afterwards.
 This is because transferring data across the bus between the RAM and the GPU memory is the bottleneck in this process.
 The less information is transmitted over the slow bus, the faster the whole process as a whole.</p>

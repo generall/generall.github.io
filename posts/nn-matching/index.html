@@ -16,7 +16,7 @@
       "@type" : "BlogPosting",
       "mainEntityOfPage": {
            "@type": "WebPage",
-           "@id": "http:\/\/comprehension.ml\/"
+           "@id": "https:\/\/comprehension.ml\/"
       },
       "articleSection" : "posts",
       "name" : "Matching models",
@@ -31,7 +31,7 @@
       "copyrightYear" : "2018",
       "datePublished": "2018-06-27 01:52:58 \x2b0300 MSK",
       "dateModified" : "2018-06-27 01:52:58 \x2b0300 MSK",
-      "url" : "http:\/\/comprehension.ml\/posts\/nn-matching\/",
+      "url" : "https:\/\/comprehension.ml\/posts\/nn-matching\/",
       "wordCount" : "206",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
   }
@@ -54,7 +54,7 @@
 </style>
 
 
-<link rel="stylesheet" href="http://comprehension.ml/css/main.css">
+<link rel="stylesheet" href="https://comprehension.ml/css/main.css">
 
 
 
@@ -139,11 +139,11 @@
                     
                         <ul class="nav navbar-nav">
                             
-                                <li><a href="http://comprehension.ml/">Home</a></li>
+                                <li><a href="https://comprehension.ml/">Home</a></li>
                             
-                                <li><a href="http://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
+                                <li><a href="https://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
                             
-                                <li><a href="http://comprehension.ml/posts/">Posts</a></li>
+                                <li><a href="https://comprehension.ml/posts/">Posts</a></li>
                             
                         </ul>
                     
@@ -172,21 +172,21 @@
 
         </div>
 
-        <div align="start" class="content"><p><img src="http://comprehension.ml/img/deep_archs.png" alt="Ininteraction VS representation"></p>
+        <div align="start" class="content"><p><img src="https://comprehension.ml/img/deep_archs.png" alt="Ininteraction VS representation"></p>
 <p>A variety of deep matching models can be categorized into two types according to their architecture.
 One is the representation-focused model (pic. 1), which tries to build a good representation for a single text with a deep neural network, and then conducts matching between compressed text representations. Examples include <a href="https://www.microsoft.com/en-us/research/project/dssm/">DSSM</a>, <a href="https://www.microsoft.com/en-us/research/publication/learning-semantic-representations-using-convolutional-neural-networks-for-web-search/">C-DSSM</a> and <a href="https://arxiv.org/abs/1503.03244">ARC-I</a>.</p>
-<p><img src="http://comprehension.ml/img/representation_based.png" alt="representation_based"></p>
+<p><img src="https://comprehension.ml/img/representation_based.png" alt="representation_based"></p>
 <p>The other is the interaction-focused model (pic. 2), which first builds local interactions (i.e., local matching signals) between two
 pieces of text, and then uses deep neural networks to learn hierarchical interaction patterns for matching. Examples
 include <a href="https://arxiv.org/abs/1511.08277">MV-LSTM</a>, <a href="https://arxiv.org/abs/1503.03244">ARC-II</a> and <a href="https://arxiv.org/abs/1602.06359">MatchPyramid</a>.</p>
-<p><img src="http://comprehension.ml/img/interaction_based.png" alt="interaction_based"></p>
+<p><img src="https://comprehension.ml/img/interaction_based.png" alt="interaction_based"></p>
 <p>Useful property of representation-focused models is the possibility to pre-compute representation vectors.
 It allows, for example, to perform fast ranking of web pages in search engines.</p>
 <p>However, it does not take into account the interaction between two texts until an individual presentation of each text is generated.
 Therefore there is a risk of losing details (e.g., a city name) important for the matching task in representing the texts.
 In other words, in the forward phase (prediction), the representation of each text is formed without knowledge of each other.
 As a result, interaction-focused models tends to perform better in Question Answering and Paraphrase Identification tasks, though they are not applicable for web-scale matching.</p>
-<p><img src="http://comprehension.ml/img/arcii.png" alt="ARC-II Network"></p>
+<p><img src="https://comprehension.ml/img/arcii.png" alt="ARC-II Network"></p>
 </div>
 
         

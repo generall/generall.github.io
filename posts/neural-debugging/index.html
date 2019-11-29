@@ -16,7 +16,7 @@
       "@type" : "BlogPosting",
       "mainEntityOfPage": {
            "@type": "WebPage",
-           "@id": "http:\/\/comprehension.ml\/"
+           "@id": "https:\/\/comprehension.ml\/"
       },
       "articleSection" : "posts",
       "name" : "Neural Networks debugging",
@@ -31,7 +31,7 @@
       "copyrightYear" : "2018",
       "datePublished": "2018-06-30 01:51:34 \x2b0300 MSK",
       "dateModified" : "2018-06-30 01:51:34 \x2b0300 MSK",
-      "url" : "http:\/\/comprehension.ml\/posts\/neural-debugging\/",
+      "url" : "https:\/\/comprehension.ml\/posts\/neural-debugging\/",
       "wordCount" : "652",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
   }
@@ -54,7 +54,7 @@
 </style>
 
 
-<link rel="stylesheet" href="http://comprehension.ml/css/main.css">
+<link rel="stylesheet" href="https://comprehension.ml/css/main.css">
 
 
 
@@ -139,11 +139,11 @@
                     
                         <ul class="nav navbar-nav">
                             
-                                <li><a href="http://comprehension.ml/">Home</a></li>
+                                <li><a href="https://comprehension.ml/">Home</a></li>
                             
-                                <li><a href="http://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
+                                <li><a href="https://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
                             
-                                <li><a href="http://comprehension.ml/posts/">Posts</a></li>
+                                <li><a href="https://comprehension.ml/posts/">Posts</a></li>
                             
                         </ul>
                     
@@ -186,7 +186,7 @@ Let me illustrate this approach. On picture example we can see that model is abl
 <li>Stroke</li>
 </ul>
 <p>And it can't distinguish <em>alignment</em> and <em>count</em> of objects. Keep in mind that number of layers and neurons should be scaled down according to the size of synthetic data, or network will overfit. Knowing evaluation results we can quickly iterate over modifications for our network architecture.</p>
-<p><img src="http://comprehension.ml/img/ssyntetic_data.svg.png" alt="Step-by-step examples"></p>
+<p><img src="https://comprehension.ml/img/ssyntetic_data.svg.png" alt="Step-by-step examples"></p>
 <p>Of course solving synthetic dataset does not guarantee solving real-life tasks. As well as passing Unit test does not guarantee that code has no bugs.
 But there is another useful thing we can do: with large amount of small experiments we can detect relations between the result and changing of network parameters. This information will help us to concentrate on significant parameters tuning while training on real data.</p>
 <p>Not only images can synthesized for training. In my NEL project I am using 13 synthetic <em>text</em> datasets. Size of this datasets allows me to debug neural network on laptop without any GPU. You can find code its generation <a href="https://github.com/generall/OneShotCDSSM/blob/master/ComplexTopicsGenerator.ipynb">here</a>.
@@ -215,7 +215,7 @@ So the only way for network to minimize error is to remember noise in train set.
 Train loss goes down quickly but validation loss grows - typical overfitting (pic 1.).</p>
 <p>One possible way to solve this dataset is to change network architecture to the one that can handle low level interactions between words in sentence pair.
 In previous post I mentioned interaction-focused models, the exact type of models we need. I choose <a href="https://arxiv.org/abs/1503.03244">ARC-II</a> architecture for my experiment, you can check out implementation <a href="https://github.com/generall/OneShotCDSSM/blob/master/src/model/arc2.py">here</a>. New model fits synthetic data perfectly well (pic 2.). As a result we can safely skip time consuming experiments with CDSSM model on real dataset.</p>
-<p><img src="http://comprehension.ml/img/arcii.png" alt="ARC-II Network"></p>
+<p><img src="https://comprehension.ml/img/arcii.png" alt="ARC-II Network"></p>
 </div>
 
         

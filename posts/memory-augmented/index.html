@@ -16,7 +16,7 @@
       "@type" : "BlogPosting",
       "mainEntityOfPage": {
            "@type": "WebPage",
-           "@id": "http:\/\/comprehension.ml\/"
+           "@id": "https:\/\/comprehension.ml\/"
       },
       "articleSection" : "posts",
       "name" : "Memory Augmented",
@@ -31,7 +31,7 @@
       "copyrightYear" : "2019",
       "datePublished": "2019-02-15 01:48:18 \x2b0300 MSK",
       "dateModified" : "2019-02-15 01:48:18 \x2b0300 MSK",
-      "url" : "http:\/\/comprehension.ml\/posts\/memory-augmented\/",
+      "url" : "https:\/\/comprehension.ml\/posts\/memory-augmented\/",
       "wordCount" : "181",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
   }
@@ -54,7 +54,7 @@
 </style>
 
 
-<link rel="stylesheet" href="http://comprehension.ml/css/main.css">
+<link rel="stylesheet" href="https://comprehension.ml/css/main.css">
 
 
 
@@ -139,11 +139,11 @@
                     
                         <ul class="nav navbar-nav">
                             
-                                <li><a href="http://comprehension.ml/">Home</a></li>
+                                <li><a href="https://comprehension.ml/">Home</a></li>
                             
-                                <li><a href="http://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
+                                <li><a href="https://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
                             
-                                <li><a href="http://comprehension.ml/posts/">Posts</a></li>
+                                <li><a href="https://comprehension.ml/posts/">Posts</a></li>
                             
                         </ul>
                     
@@ -174,7 +174,7 @@
 
         <div align="start" class="content"><p>Neural networks achieved great success at various NLP tasks, however, they are limited at handling infrequent patterns. In <a href="https://www.aclweb.org/anthology/D17-1146">this article</a>, the problem is described in the context of machine translation task.</p>
 <p>The authors noted that NMT is good at learning translation pairs that are frequently observed, but the system may ‘forget’ to use low-frequency pairs when they should be. In contrast, in traditional rule-based systems, low-frequency pairs cannot be smoothed out no matter how rare they are. One solution to this is combining both approaches.</p>
-<p><img src="http://comprehension.ml/img/mem_nmt.png" alt="mem_nmt"></p>
+<p><img src="https://comprehension.ml/img/mem_nmt.png" alt="mem_nmt"></p>
 <p>The authors propose to use a large external memory along with a selection mechanism to allow NN to use this memory. Selection fetches all relevant translation variants using words in source sentence and then an attention mechanism selects among these variants. After that neural net decides what source of prediction should be used on each translation step.</p>
 <p>The important thing is that the vectors for external memory were trained separately. That basically means that we can build knowledge bases for neural nets. That seems like a promising way to construct really large-scale models with huge capacity.</p>
 </div>
