@@ -6,10 +6,19 @@
     <description>Recent content on COMPREHENSION.ML</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Nov 2019 22:44:08 +0300</lastBuildDate>
+    <lastBuildDate>Mon, 16 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://comprehension.ml/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Tsetlin Machine</title>
+      <link>https://comprehension.ml/posts/tsetlin-machine/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://comprehension.ml/posts/tsetlin-machine/</guid>
+      <description>Recently I found an interesting repository on GitHub. Actually, it is not a single repository, but a whole project, created by a CAIR center for research at the University of Agder. It includes a bunch of articles and different implementations of a novel concept called Tsetlin Machine. The author claims that this approach can replace neural networks and is faster and more accurate. This work itself looks quite marginal, it&#39;s not recent but didn&#39;t become widely used.</description>
+    </item>
     
     <item>
       <title>Filterable approximate nearest neighbors search</title>
