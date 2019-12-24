@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+<meta name="description" content="Personal blog about Neural Networks, NLP and Software Engineering.">
+<meta name="keywords" content="NLP, neural networks, pytorch, telegram, engineering, ML, fasttext, simaes networks, BERT, transformer, word2vec, deploy, allennlp, blog">
+
+
+<script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/comprehension.ml\/"
+      },
+      "articleSection" : "posts",
+      "name" : "Tsetlin Machine",
+      "headline" : "Tsetlin Machine",
+      "description" : "An interesting concept of another NN killer witch might be underestimated.",
+      "inLanguage" : "en-US",
+      "author" : "Andrey Vasnetsov",
+      "creator" : "Andrey Vasnetsov",
+      "publisher": "Andrey Vasnetsov",
+      "accountablePerson" : "Andrey Vasnetsov",
+      "copyrightHolder" : "Andrey Vasnetsov",
+      "copyrightYear" : "2019",
+      "datePublished": "2019-12-16 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2019-12-16 00:00:00 \x2b0000 UTC",
+      "url" : "https:\/\/comprehension.ml\/posts\/tsetlin-machine\/",
+      "wordCount" : "301",
+      "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
+  }
+</script>
+
+        <title>Tsetlin Machine</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://comprehension.ml/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokailight.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/json.min.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.61.0" />
+        
+
+        
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56301881-3"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments)};
+              gtag('js', new Date());
+              gtag('config', 'UA-56301881-3');
+            </script>
+        
+
+        
+            <meta name="yandex-verification" content="6c7b43afecb1426c" />
+        
+
+        
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    processEscapes: true
+                }
+                });
+            </script>
+            <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+
+        
+
+    </head>
+
+    <body>
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">Tsetlin Machine</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://comprehension.ml/">Home</a></li>
+                            
+                                <li><a href="https://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
+                            
+                                <li><a href="https://comprehension.ml/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:vasnetsov93&#43;blog@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/generall"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://t.me/neural_network_engineering"><i class="fa fa-telegram"></i></a></li>
+                            
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+    
+        <div>
+            <h2>Tsetlin Machine</h2>
+            <h5>December 16, 2019</h5>
+            
+
+        </div>
+
+        <div align="start" class="content"><p>Recently I found an interesting <a href="https://github.com/cair/pyTsetlinMachine">repository</a> on GitHub.
+Actually, it is not a single repository, but a <a href="https://github.com/cair">whole project</a>, created by a CAIR center for research at the University of Agder.
+It includes a bunch of articles and different implementations of a novel concept called Tsetlin Machine.
+The author claims that this approach can replace neural networks and is faster and more accurate.
+This work itself looks quite marginal, it's not recent but didn't become widely used.
+It is noticeable that it is alive only thanks to the enthusiasm of several people.</p>
+<p>From public sources, I found only the <a href="https://cair.uia.no/milestones-and-discoveries/the-tsetlin-machine-outperforms-neural-networks/">overselling press release</a> of their own university and a <a href="https://www.reddit.com/r/MachineLearning/comments/89yp8g/r_the_tsetlin_machine_a_new_approach_to_ml/">skeptical thread</a> on Reddit. As rightly noted in the latter, there are quite a few red flags and imperfections in this work, including excessive self-citation, unconvincing MNIST experiments, a poorly written article that is difficult to read.</p>
+<p>However, I still decided to spend a little time reading about this concept - to use finite automaton states with linear tactics as trainable parameters of the model.
+States define if signals are used in a logical clause or not.
+The model is trained with two types of feedback: first fights false-negative actuation of the Clause and the second, false-positive, respectively.</p>
+<p>The author shows benchmarks of the model on a couple different tasks but pays small attention to the main problem - there is no method provided to make Tsetlin Machine truly deep.
+Instead, he suggests to train it layer by layer like Hinton trained a Deep Belief Network.
+This restriction won't let Tsetlin Machine equal with neural networks in any area.</p>
+<p>On the other hand, there are no theoretical limitations for the discrete feedback propagation mechanism to exist.
+I going to conduct some experiments with this concept, will keep you posted if something works out.</p>
+<p><img src="https://comprehension.ml/img/tsetlin_machine.png" alt="Tsetlin Machine concept"></p>
+</div>
+
+        
+        
+        
+
+        
+        
+    
+</main>
+
+        <footer>
+            <p class="copyright text-muted">© All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a>.</p>
+        </footer>
+
+        
+
+        
+    </body>
+
+</html>
+
