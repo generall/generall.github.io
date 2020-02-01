@@ -29,8 +29,8 @@
       "accountablePerson" : "Andrey Vasnetsov",
       "copyrightHolder" : "Andrey Vasnetsov",
       "copyrightYear" : "2018",
-      "datePublished": "2018-01-24 01:53:07 \x2b0300 MSK",
-      "dateModified" : "2018-01-24 01:53:07 \x2b0300 MSK",
+      "datePublished": "2018-01-24 01:53:07 \x2b0300 \x2b0300",
+      "dateModified" : "2018-01-24 01:53:07 \x2b0300 \x2b0300",
       "url" : "https:\/\/comprehension.ml\/posts\/nlp-transfer\/",
       "wordCount" : "244",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
@@ -94,7 +94,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.61.0" />
+ <meta name="generator" content="Hugo 0.63.2" />
         
 
         
@@ -178,13 +178,13 @@
 
         <div align="start" class="content"><p>Sebastian Ruder wrote in his <a href="http://ruder.io/requests-for-research/index.html">blog</a> about perspectives of Neural Networks in NLP.
 He thinks that Few-Shot and Transfer learning will give huge impact in this area.
-I found his arguments convincing, so now I'm making experiments with Few-Shot learning.
+I found his arguments convincing, so now I&rsquo;m making experiments with Few-Shot learning.
 There are a lot of good datasets for Few-Shot learning problem in Computer Vision, e.g. <a href="https://github.com/brendenlake/omniglot">Omniglot</a> or any dataset for face recognition.
 The most closest analogue in NLP is Conversations and Question answering dataset.
-But result evaluation of this tasks is very specific: we can't check if random text answers some question without human because it's impossible to align all texts with a set of predefined labels like it is accomplished in Omniglot.
+But result evaluation of this tasks is very specific: we can&rsquo;t check if random text answers some question without human because it&rsquo;s impossible to align all texts with a set of predefined labels like it is accomplished in Omniglot.
 There is however a NLP task which fits Few-Shot learning approach - Named Entity Linking or NEL for short.
 In NEL we should assign exact <code>concept link</code> for each mention in text. You can think about concepts like about Wikipedia articles.
-The number of possible concepts is very large and grows with time, so it's impossible to apply regular classification techniques.
+The number of possible concepts is very large and grows with time, so it&rsquo;s impossible to apply regular classification techniques.
 It makes NEL task perfect for Few-Shot learning. I prepared WikiLinks based <a href="https://www.kaggle.com/generall/oneshotwikilinks">dataset</a>
 This dataset consists of entity mentions with corresponding wikipedia links. There are also kNN baseline which gives 70% accuracy.
 KNN uses only Bag Of Words features without any word2vec or synonyms.

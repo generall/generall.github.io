@@ -29,8 +29,8 @@
       "accountablePerson" : "Andrey Vasnetsov",
       "copyrightHolder" : "Andrey Vasnetsov",
       "copyrightYear" : "2018",
-      "datePublished": "2018-12-28 01:48:45 \x2b0300 MSK",
-      "dateModified" : "2018-12-28 01:48:45 \x2b0300 MSK",
+      "datePublished": "2018-12-28 01:48:45 \x2b0300 \x2b0300",
+      "dateModified" : "2018-12-28 01:48:45 \x2b0300 \x2b0300",
       "url" : "https:\/\/comprehension.ml\/posts\/allennlp-seq2seq\/",
       "wordCount" : "483",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
@@ -94,7 +94,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.61.0" />
+ <meta name="generator" content="Hugo 0.63.2" />
         
 
         
@@ -176,14 +176,14 @@
 
         </div>
 
-        <div align="start" class="content"><p>Let's continue to dive into Question Answering. Last time we <a href="https://github.com/generall/allennlp_sandbox/blob/master/SyntheticQA.ipynb">have generated</a> several variants of synthetic sequences, from which we need to extract &ldquo;answers&rdquo;. Each sequence type has each own pattern, and we want a neural network to find it.
+        <div align="start" class="content"><p>Let&rsquo;s continue to dive into Question Answering. Last time we <a href="https://github.com/generall/allennlp_sandbox/blob/master/SyntheticQA.ipynb">have generated</a> several variants of synthetic sequences, from which we need to extract &ldquo;answers&rdquo;. Each sequence type has each own pattern, and we want a neural network to find it.
 In a most general sense, this task looks like sequence transformation - Seq2seq, similar to <a href="http://opennmt.net/">NMT</a>.
 In this post, I will describe how to implement a simple Seq2seq network with <a href="https://github.com/allenai/allennlp">AllenNLP framework</a>.</p>
 <p>AllenNLP library includes components that standardize and simplify the creation of neural networks for text processing.
 Its developers conducted a great work decomposing variety of NLP tasks into separate blocks.
 It allowed to implement a set of universal pipeline components, suitable for reuse.
 Implemented components could be used directly from code or for creating configs.</p>
-<p>I have created a <a href="https://github.com/generall/allennlp_sandbox">repository</a> for my experiments. It contains a simple config file along with some accessory files. Let's take a <a href="https://github.com/generall/allennlp_sandbox/blob/master/allen_test_conf.json">look</a>.</p>
+<p>I have created a <a href="https://github.com/generall/allennlp_sandbox">repository</a> for my experiments. It contains a simple config file along with some accessory files. Let&rsquo;s take a <a href="https://github.com/generall/allennlp_sandbox/blob/master/allen_test_conf.json">look</a>.</p>
 <p>One of the main configuration parameters is a <code>model</code>.  The model determines what happens to the data and the network during training and forecasting. The model parameter itself is a class that derives from <code>allennlp.models.model.Model</code> and implements the <code>forward</code> method.
 We will use <a href="https://github.com/generall/allennlp_sandbox/blob/master/allen_test_conf.json#L12">simple_seq2seq</a> model which implements a basic sequence transformation scheme.</p>
 <p><img src="https://comprehension.ml/img/seq2seq.png" alt="seq2seq model"></p>
@@ -200,7 +200,7 @@ We will use the simplest encoder option - LSTM.</p>
 <p>Then we save our dataset so that the <code>seq2seq</code> <a href="https://github.com/generall/allennlp_sandbox/blob/master/allen_test_conf.json#L2">dataset reader</a>, implemented in AllenNLP, could work with it. Now we can launch training with a single command <code>allennlp train config.json</code> and observe training statistics on a Tensorboard.
 A trained model could be easily used from Python, here is an <a href="https://github.com/generall/allennlp_sandbox/blob/master/predictor.py">example</a>.</p>
 <p>It should be noticed, that model is quickly overfitting on a synthetic data, so I generated a lot of it.</p>
-<p>Unfortunately, AllenNLP seq2seq module is still under construction. It can't handle all existing variants of seq2seq models. For example, you can't implement Attention Transformer architecture from the article <a href="https://arxiv.org/abs/1706.03762">Attention is all you need</a>. Attention Transformer requires a custom decoder, but it is hardcoded in <code>simple_seq2seq</code>. If you want to contribute AllenNLP seq2seq model, please, take a look at <a href="https://github.com/allenai/allennlp/issues/2097">this issue</a>. If you leave your reaction, it will help to focus AllenNLP developers attention on it.</p>
+<p>Unfortunately, AllenNLP seq2seq module is still under construction. It can&rsquo;t handle all existing variants of seq2seq models. For example, you can&rsquo;t implement Attention Transformer architecture from the article <a href="https://arxiv.org/abs/1706.03762">Attention is all you need</a>. Attention Transformer requires a custom decoder, but it is hardcoded in <code>simple_seq2seq</code>. If you want to contribute AllenNLP seq2seq model, please, take a look at <a href="https://github.com/allenai/allennlp/issues/2097">this issue</a>. If you leave your reaction, it will help to focus AllenNLP developers attention on it.</p>
 </div>
 
         

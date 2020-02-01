@@ -29,8 +29,8 @@
       "accountablePerson" : "Andrey Vasnetsov",
       "copyrightHolder" : "Andrey Vasnetsov",
       "copyrightYear" : "2019",
-      "datePublished": "2019-04-28 01:47:20 \x2b0300 MSK",
-      "dateModified" : "2019-04-28 01:47:20 \x2b0300 MSK",
+      "datePublished": "2019-04-28 01:47:20 \x2b0300 \x2b0300",
+      "dateModified" : "2019-04-28 01:47:20 \x2b0300 \x2b0300",
       "url" : "https:\/\/comprehension.ml\/posts\/shrincking-fasttext\/",
       "wordCount" : "804",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
@@ -94,7 +94,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.61.0" />
+ <meta name="generator" content="Hugo 0.63.2" />
         
 
         
@@ -182,13 +182,13 @@ They were trained on a many languages, carry subword information, support OOV wo
 <p>But their main disadvantage is the size. Even compressed version of the binary model takes 5.4Gb.
 This fact makes it impossible to use pretrained models on a laptop or a small VM instances.</p>
 <p>Being loaded into RAM, this model takes even more memory ~ 16Gb.
-So you can't use it directly with Google Colab, which only gives you 12 GB of RAM.</p>
+So you can&rsquo;t use it directly with Google Colab, which only gives you 12 GB of RAM.</p>
 <p>There are two main reasons why binary models weight so much.
 The first one is that binary model carries not only weights for words and n-grams, but also weights for translating vectors back to words.
 These vectors are also called negative vectors and are used for additional training of the model.</p>
 <p>The second reason is that word and n-gram matrices are very large, they contain 2M vectors each.
 This is more than enough for most practical applications.</p>
-<p>Let's deal with both of this problems.</p>
+<p>Let&rsquo;s deal with both of this problems.</p>
 <p>The easiest part is to just drop trainables. One way to do this is to convert the native fastText format into <a href="https://radimrehurek.com/gensim/">Gensim</a> representation.</p>
 <pre><code>from gensim.models import FastText
 
@@ -198,7 +198,7 @@ ft = FastText.load_fasttext_format(&quot;fasttext_embedding.bin&quot;)
 # we are not saving trainables here 
 ft.wv.save('fasttext_gensim.model') 
 </code></pre><p>That is easy. Now instead of 16Gb of RAM, our model will take only 10Gb.</p>
-<p>Let's go further.</p>
+<p>Let&rsquo;s go further.</p>
 <p>There are two embedding matrices in the fastText model: vocab matrix and n-gram matrix.
 The first one is simple, it just holds the embedding vector for each word in the vocabulary.
 Vocabulary is also presented and is sorted by frequency, so the only thing we need to do is to take the first N rows from this matrix and remove infrequent words from the vocabulary. You may find a reference to my implementation at the bottom of this article.</p>

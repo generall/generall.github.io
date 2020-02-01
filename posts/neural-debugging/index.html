@@ -29,8 +29,8 @@
       "accountablePerson" : "Andrey Vasnetsov",
       "copyrightHolder" : "Andrey Vasnetsov",
       "copyrightYear" : "2018",
-      "datePublished": "2018-06-30 01:51:34 \x2b0300 MSK",
-      "dateModified" : "2018-06-30 01:51:34 \x2b0300 MSK",
+      "datePublished": "2018-06-30 01:51:34 \x2b0300 \x2b0300",
+      "dateModified" : "2018-06-30 01:51:34 \x2b0300 \x2b0300",
       "url" : "https:\/\/comprehension.ml\/posts\/neural-debugging\/",
       "wordCount" : "652",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
@@ -94,7 +94,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.61.0" />
+ <meta name="generator" content="Hugo 0.63.2" />
         
 
         
@@ -189,7 +189,7 @@ Let me illustrate this approach. On picture example we can see that model is abl
 <li>Rotation</li>
 <li>Stroke</li>
 </ul>
-<p>And it can't distinguish <em>alignment</em> and <em>count</em> of objects. Keep in mind that number of layers and neurons should be scaled down according to the size of synthetic data, or network will overfit. Knowing evaluation results we can quickly iterate over modifications for our network architecture.</p>
+<p>And it can&rsquo;t distinguish <em>alignment</em> and <em>count</em> of objects. Keep in mind that number of layers and neurons should be scaled down according to the size of synthetic data, or network will overfit. Knowing evaluation results we can quickly iterate over modifications for our network architecture.</p>
 <p><img src="https://comprehension.ml/img/ssyntetic_data.svg.png" alt="Step-by-step examples"></p>
 <p>Of course solving synthetic dataset does not guarantee solving real-life tasks. As well as passing Unit test does not guarantee that code has no bugs.
 But there is another useful thing we can do: with large amount of small experiments we can detect relations between the result and changing of network parameters. This information will help us to concentrate on significant parameters tuning while training on real data.</p>

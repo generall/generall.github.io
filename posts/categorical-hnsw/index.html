@@ -29,10 +29,10 @@
       "accountablePerson" : "Andrey Vasnetsov",
       "copyrightHolder" : "Andrey Vasnetsov",
       "copyrightYear" : "2019",
-      "datePublished": "2019-11-24 22:44:08 \x2b0300 MSK",
-      "dateModified" : "2019-11-24 22:44:08 \x2b0300 MSK",
+      "datePublished": "2019-11-24 22:44:08 \x2b0300 \x2b0300",
+      "dateModified" : "2019-11-24 22:44:08 \x2b0300 \x2b0300",
       "url" : "https:\/\/comprehension.ml\/posts\/categorical-hnsw\/",
-      "wordCount" : "1046",
+      "wordCount" : "1055",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
   }
 </script>
@@ -94,7 +94,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.61.0" />
+ <meta name="generator" content="Hugo 0.63.2" />
         
 
         
@@ -182,7 +182,7 @@ All of them will give you a fast approximate neighbors search within almost any 
 For example, you want search only for products in some category or select the most similar customer of a particular brand.
 I did not find any simple solutions for this.
 There are several discussions like <a href="https://github.com/spotify/annoy/issues/263">this</a>, but they only suggest to iterate over top search results and apply conditions consequently after the search.</p>
-<p>Let's see if we could somehow modify any of ANN algorithms to be able to apply constrains during the search itself.</p>
+<p>Let&rsquo;s see if we could somehow modify any of ANN algorithms to be able to apply constrains during the search itself.</p>
 <p>Annoy builds tree index over random projections.
 Tree index implies that we will meet same problem that appears in relational databases:
 if field indexes were built independently, then it is possible to use only one of them at a time.
@@ -222,7 +222,7 @@ Therefore, the theoretical conclusions obtained in the <a href="https://en.wikip
 <p>There is a clear threshold when the search begins to fail.
 This threshold is due to the decomposition of the graph into small connected components.
 The graphs also show that this threshold can be shifted by increasing the $m$ parameter of the algorithm, which is responsible for the degree of nodes.</p>
-<p>Let's consider some other filtering conditions we might want to apply in the search:</p>
+<p>Let&rsquo;s consider some other filtering conditions we might want to apply in the search:</p>
 <ul>
 <li>Categorical filtering
 <ul>
@@ -269,6 +269,8 @@ Filtering can be carried out on the basis of belonging to categories,
 which in turn is generalized to such popular cases as numerical ranges and geo.</p>
 <p>Experiments were carried by modification <a href="https://github.com/generall/hnsw-python">python implementation</a> of the algorithm,
 but real production systems require much faster version, like <a href="https://github.com/nmslib/nmslib">NMSLib</a>.</p>
+<h2 id="upd">UPD.</h2>
+<p>Also <a href="https://comprehension.ml/posts/categorical-hnsw-part-2/">read</a> about the <a href="">implementation</a> of the algorithm!</p>
 </div>
 
         

@@ -29,8 +29,8 @@
       "accountablePerson" : "Andrey Vasnetsov",
       "copyrightHolder" : "Andrey Vasnetsov",
       "copyrightYear" : "2018",
-      "datePublished": "2018-07-24 01:50:06 \x2b0300 MSK",
-      "dateModified" : "2018-07-24 01:50:06 \x2b0300 MSK",
+      "datePublished": "2018-07-24 01:50:06 \x2b0300 \x2b0300",
+      "dateModified" : "2018-07-24 01:50:06 \x2b0300 \x2b0300",
       "url" : "https:\/\/comprehension.ml\/posts\/batch-multiprocessing\/",
       "wordCount" : "451",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
@@ -94,7 +94,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.61.0" />
+ <meta name="generator" content="Hugo 0.63.2" />
         
 
         
@@ -178,8 +178,8 @@
 
         <div align="start" class="content"><p>Using multiple processes to construct train batches may significantly reduce total training time of your network.
 Basically, if you are using GPU for training, you can reduce additional batch construction time almost to zero. This is achieved through pipelining of computations: while GPU crunches numbers, CPU makes preprocessing. Python <code>multiprocessing</code> module allows us to implement such pipelining as elegant as it is possible in the language with GIL.</p>
-<p>PyTorch <code>DataLoader</code> class, for example, also uses <code>multiprocessing</code> in it's internals.
-Unfortunately <code>DataLoader</code> suffers lack of flexibility. It's impossible to create batch with any complex structure within standard <code>DataLoader</code> class. So it should be useful to be able to apply raw <code>multiprocessing</code>.</p>
+<p>PyTorch <code>DataLoader</code> class, for example, also uses <code>multiprocessing</code> in it&rsquo;s internals.
+Unfortunately <code>DataLoader</code> suffers lack of flexibility. It&rsquo;s impossible to create batch with any complex structure within standard <code>DataLoader</code> class. So it should be useful to be able to apply raw <code>multiprocessing</code>.</p>
 <p><code>multiprocessing</code> gives us a set of useful APIs to distribute computations among several processes. Processes does not share memory with each other, so data is transmitted via inter-process communication protocols. For example in linux-like operation systems <code>multiprocessing</code> uses pipes. Such organization leads to some pitfalls that I am going to tell you.</p>
 <h2 id="map-vs-imap"><code>map</code> vs <code>imap</code></h2>
 <p>Methods <code>map</code> and <code>imap</code> may be used to apply preprocessing to batches. Both of them take processing function and iterable as argument. The difference is that <code>imap</code> is lazy. It will return processed elements as soon as they are ready. In this case all processed batched should not be stored in RAM simultaneously. For training NN you should always prefer <code>imap</code>:</p>
@@ -223,7 +223,7 @@ Unfortunately <code>DataLoader</code> suffers lack of flexibility. It's impossib
 
 <span style="color:#00a8c8">for</span> <span style="color:#111">x</span> <span style="color:#f92672">in</span> <span style="color:#111">pooling</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">:</span>
     <span style="color:#111">learn_gpu</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">)</span>
-</code></pre></div><p><code>Semaphore</code> has internal counter syncronized across all working processes. It's logic will block execution if some process tries to increase counet value above limit with <code>semaphore.acquire()</code></p>
+</code></pre></div><p><code>Semaphore</code> has internal counter syncronized across all working processes. It&rsquo;s logic will block execution if some process tries to increase counet value above limit with <code>semaphore.acquire()</code></p>
 </div>
 
         

@@ -6,10 +6,21 @@
     <description>Recent content in Posts on COMPREHENSION.ML</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jan 2020 23:03:02 +0100</lastBuildDate>
     
 	<atom:link href="https://comprehension.ml/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Filtrable HNSW Part 2 - Implementation</title>
+      <link>https://comprehension.ml/posts/categorical-hnsw-part-2/</link>
+      <pubDate>Wed, 29 Jan 2020 23:03:02 +0100</pubDate>
+      
+      <guid>https://comprehension.ml/posts/categorical-hnsw-part-2/</guid>
+      <description>In a previous article on the filter when searching for nearest neighbors, we discussed the theoretical background: What can be modified in the HNSW algorithm to make it usable for search with constraints?
+This time I am going to present a C++ implementation with Python bindings.
+As a base implementation of HNSW I took hnswlib, stand-alone header-only implementation of HNSW. This library is highly performance-oriented, so it used some low-level optimization tricks which I had to remove.</description>
+    </item>
     
     <item>
       <title>Tsetlin Machine</title>
@@ -17,7 +28,7 @@
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://comprehension.ml/posts/tsetlin-machine/</guid>
-      <description>Recently I found an interesting repository on GitHub. Actually, it is not a single repository, but a whole project, created by a CAIR center for research at the University of Agder. It includes a bunch of articles and different implementations of a novel concept called Tsetlin Machine. The author claims that this approach can replace neural networks and is faster and more accurate. This work itself looks quite marginal, it&#39;s not recent but didn&#39;t become widely used.</description>
+      <description>Recently I found an interesting repository on GitHub. Actually, it is not a single repository, but a whole project, created by a CAIR center for research at the University of Agder. It includes a bunch of articles and different implementations of a novel concept called Tsetlin Machine. The author claims that this approach can replace neural networks and is faster and more accurate. This work itself looks quite marginal, it&amp;rsquo;s not recent but didn&amp;rsquo;t become widely used.</description>
     </item>
     
     <item>
@@ -58,7 +69,7 @@ But there are some cases when we want to be able to train word embeddings in our
       <guid>https://comprehension.ml/posts/shrincking-fasttext/</guid>
       <description>Pretrained fastText embeddings are great. They were trained on a many languages, carry subword information, support OOV words.
 But their main disadvantage is the size. Even compressed version of the binary model takes 5.4Gb. This fact makes it impossible to use pretrained models on a laptop or a small VM instances.
-Being loaded into RAM, this model takes even more memory ~ 16Gb. So you can&#39;t use it directly with Google Colab, which only gives you 12 GB of RAM.</description>
+Being loaded into RAM, this model takes even more memory ~ 16Gb. So you can&amp;rsquo;t use it directly with Google Colab, which only gives you 12 GB of RAM.</description>
     </item>
     
     <item>
@@ -77,7 +88,7 @@ The authors noted that NMT is good at learning translation pairs that are freque
       <pubDate>Fri, 28 Dec 2018 01:48:45 +0300</pubDate>
       
       <guid>https://comprehension.ml/posts/allennlp-seq2seq/</guid>
-      <description>Let&#39;s continue to dive into Question Answering. Last time we have generated several variants of synthetic sequences, from which we need to extract &amp;ldquo;answers&amp;rdquo;. Each sequence type has each own pattern, and we want a neural network to find it. In a most general sense, this task looks like sequence transformation - Seq2seq, similar to NMT. In this post, I will describe how to implement a simple Seq2seq network with AllenNLP framework.</description>
+      <description>Let&amp;rsquo;s continue to dive into Question Answering. Last time we have generated several variants of synthetic sequences, from which we need to extract &amp;ldquo;answers&amp;rdquo;. Each sequence type has each own pattern, and we want a neural network to find it. In a most general sense, this task looks like sequence transformation - Seq2seq, similar to NMT. In this post, I will describe how to implement a simple Seq2seq network with AllenNLP framework.</description>
     </item>
     
     <item>
@@ -98,7 +109,7 @@ A. Relational database B. Complex data structure - ontology, semantic web, e.t.c
       <pubDate>Sat, 04 Aug 2018 01:49:45 +0300</pubDate>
       
       <guid>https://comprehension.ml/posts/on-disk-fasttext/</guid>
-      <description>There are some cases when you need to run your model on a small instance. For example, if your model is being called 1 time per hour or you just don&#39;t want to pay $150 per month to Amazon for t2.2xlarge instance with 32Gb RAM. The problem is that the size of most pre-trained word embeddings can reach tens of gigabytes.
+      <description>There are some cases when you need to run your model on a small instance. For example, if your model is being called 1 time per hour or you just don&amp;rsquo;t want to pay $150 per month to Amazon for t2.2xlarge instance with 32Gb RAM. The problem is that the size of most pre-trained word embeddings can reach tens of gigabytes.
 In this post, I will describe the method of access word vectors without loading it into memory.</description>
     </item>
     
@@ -109,7 +120,7 @@ In this post, I will describe the method of access word vectors without loading 
       
       <guid>https://comprehension.ml/posts/batch-multiprocessing/</guid>
       <description>Using multiple processes to construct train batches may significantly reduce total training time of your network. Basically, if you are using GPU for training, you can reduce additional batch construction time almost to zero. This is achieved through pipelining of computations: while GPU crunches numbers, CPU makes preprocessing. Python multiprocessing module allows us to implement such pipelining as elegant as it is possible in the language with GIL.
-PyTorch DataLoader class, for example, also uses multiprocessing in it&#39;s internals.</description>
+PyTorch DataLoader class, for example, also uses multiprocessing in it&amp;rsquo;s internals.</description>
     </item>
     
     <item>
@@ -118,7 +129,7 @@ PyTorch DataLoader class, for example, also uses multiprocessing in it&#39;s int
       <pubDate>Fri, 13 Jul 2018 01:50:27 +0300</pubDate>
       
       <guid>https://comprehension.ml/posts/embedding-bag/</guid>
-      <description>An important feature of FastText embeddings is the usage of subword information. In addition to the vocabulary FastText also contains word&#39;s ngrams. This additional information is useful for the following: handling Out-Of-Vocabulary words, extracting sense from word&#39;s etymology and dealing with misspellings.
+      <description>An important feature of FastText embeddings is the usage of subword information. In addition to the vocabulary FastText also contains word&amp;rsquo;s ngrams. This additional information is useful for the following: handling Out-Of-Vocabulary words, extracting sense from word&amp;rsquo;s etymology and dealing with misspellings.
 But unfortunately all this advantages are not used in most open source projects. We can easily discover it via GitHub.
 The point is that regular Embedding layer maps the whole word into a single, stored in memory, fixed vector.</description>
     </item>
@@ -166,7 +177,7 @@ The other is the interaction-focused model (pic. 2), which first builds local in
       <pubDate>Wed, 24 Jan 2018 01:53:07 +0300</pubDate>
       
       <guid>https://comprehension.ml/posts/nlp-transfer/</guid>
-      <description>Sebastian Ruder wrote in his blog about perspectives of Neural Networks in NLP. He thinks that Few-Shot and Transfer learning will give huge impact in this area. I found his arguments convincing, so now I&#39;m making experiments with Few-Shot learning. There are a lot of good datasets for Few-Shot learning problem in Computer Vision, e.g. Omniglot or any dataset for face recognition. The most closest analogue in NLP is Conversations and Question answering dataset.</description>
+      <description>Sebastian Ruder wrote in his blog about perspectives of Neural Networks in NLP. He thinks that Few-Shot and Transfer learning will give huge impact in this area. I found his arguments convincing, so now I&amp;rsquo;m making experiments with Few-Shot learning. There are a lot of good datasets for Few-Shot learning problem in Computer Vision, e.g. Omniglot or any dataset for face recognition. The most closest analogue in NLP is Conversations and Question answering dataset.</description>
     </item>
     
   </channel>

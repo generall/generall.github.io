@@ -29,8 +29,8 @@
       "accountablePerson" : "Andrey Vasnetsov",
       "copyrightHolder" : "Andrey Vasnetsov",
       "copyrightYear" : "2018",
-      "datePublished": "2018-08-04 01:49:45 \x2b0300 MSK",
-      "dateModified" : "2018-08-04 01:49:45 \x2b0300 MSK",
+      "datePublished": "2018-08-04 01:49:45 \x2b0300 \x2b0300",
+      "dateModified" : "2018-08-04 01:49:45 \x2b0300 \x2b0300",
       "url" : "https:\/\/comprehension.ml\/posts\/on-disk-fasttext\/",
       "wordCount" : "390",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
@@ -94,7 +94,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.61.0" />
+ <meta name="generator" content="Hugo 0.63.2" />
         
 
         
@@ -177,7 +177,7 @@
         </div>
 
         <div align="start" class="content"><p>There are some cases when you need to run your model on a small instance.
-For example, if your model is being called 1 time per hour or you just don't want to pay $150 per month to Amazon for t2.2xlarge instance with 32Gb RAM.
+For example, if your model is being called 1 time per hour or you just don&rsquo;t want to pay $150 per month to Amazon for t2.2xlarge instance with 32Gb RAM.
 The problem is that the size of most pre-trained word embeddings can reach tens of gigabytes.</p>
 <p>In this post, I will describe the method of access word vectors without loading it into memory.
 The idea is to simply save word vectors as a matrix so that we could compute the position of each row without reading any other rows from disk.</p>

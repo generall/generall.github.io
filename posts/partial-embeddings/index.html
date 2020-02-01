@@ -29,8 +29,8 @@
       "accountablePerson" : "Andrey Vasnetsov",
       "copyrightHolder" : "Andrey Vasnetsov",
       "copyrightYear" : "2019",
-      "datePublished": "2019-11-10 23:52:52 \x2b0300 MSK",
-      "dateModified" : "2019-11-10 23:52:52 \x2b0300 MSK",
+      "datePublished": "2019-11-10 23:52:52 \x2b0300 \x2b0300",
+      "dateModified" : "2019-11-10 23:52:52 \x2b0300 \x2b0300",
       "url" : "https:\/\/comprehension.ml\/posts\/partial-embeddings\/",
       "wordCount" : "248",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
@@ -94,7 +94,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.61.0" />
+ <meta name="generator" content="Hugo 0.63.2" />
         
 
         
@@ -185,7 +185,7 @@ And the largest part if this information is usually stored in word embeddings.</
 <li>We have a specific domain with a non-standard terminology or sentence structure</li>
 <li>We want to use additional markup like <code>&lt;tags&gt;</code> in our task</li>
 </ul>
-<p>In these cases, we need to update a small number of weights, responsible for new words and meanings. At the same time, we can't update pre-trained embeddings cause it will lead to very quick overfitting.</p>
+<p>In these cases, we need to update a small number of weights, responsible for new words and meanings. At the same time, we can&rsquo;t update pre-trained embeddings cause it will lead to very quick overfitting.</p>
 <p>To deal with this problem partially trainable embeddings were used in this project.
 The idea is to concatenate fixed pre-trained embeddings with additional small trainable embeddings. It is also useful to add a linear layer right after concatenation so embeddings could interact during training.
 Changing the size of an additional embedding gives control over the number of parameters and, as a result, allows to prevent overfitting.</p>

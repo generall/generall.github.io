@@ -94,7 +94,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.61.0" />
+ <meta name="generator" content="Hugo 0.63.2" />
         
 
         
@@ -180,7 +180,7 @@
 Actually, it is not a single repository, but a <a href="https://github.com/cair">whole project</a>, created by a CAIR center for research at the University of Agder.
 It includes a bunch of articles and different implementations of a novel concept called Tsetlin Machine.
 The author claims that this approach can replace neural networks and is faster and more accurate.
-This work itself looks quite marginal, it's not recent but didn't become widely used.
+This work itself looks quite marginal, it&rsquo;s not recent but didn&rsquo;t become widely used.
 It is noticeable that it is alive only thanks to the enthusiasm of several people.</p>
 <p>From public sources, I found only the <a href="https://cair.uia.no/milestones-and-discoveries/the-tsetlin-machine-outperforms-neural-networks/">overselling press release</a> of their own university and a <a href="https://www.reddit.com/r/MachineLearning/comments/89yp8g/r_the_tsetlin_machine_a_new_approach_to_ml/">skeptical thread</a> on Reddit. As rightly noted in the latter, there are quite a few red flags and imperfections in this work, including excessive self-citation, unconvincing MNIST experiments, a poorly written article that is difficult to read.</p>
 <p>However, I still decided to spend a little time reading about this concept - to use finite automaton states with linear tactics as trainable parameters of the model.
@@ -188,7 +188,7 @@ States define if signals are used in a logical clause or not.
 The model is trained with two types of feedback: first fights false-negative actuation of the Clause and the second, false-positive, respectively.</p>
 <p>The author shows benchmarks of the model on a couple different tasks but pays small attention to the main problem - there is no method provided to make Tsetlin Machine truly deep.
 Instead, he suggests to train it layer by layer like Hinton trained a Deep Belief Network.
-This restriction won't let Tsetlin Machine equal with neural networks in any area.</p>
+This restriction won&rsquo;t let Tsetlin Machine equal with neural networks in any area.</p>
 <p>On the other hand, there are no theoretical limitations for the discrete feedback propagation mechanism to exist.
 I going to conduct some experiments with this concept, will keep you posted if something works out.</p>
 <p><img src="https://comprehension.ml/img/tsetlin_machine.png" alt="Tsetlin Machine concept"></p>

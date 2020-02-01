@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+<meta name="description" content="Personal blog about Neural Networks, NLP and Software Engineering.">
+<meta name="keywords" content="NLP, neural networks, pytorch, telegram, engineering, ML, fasttext, simaes networks, BERT, transformer, word2vec, deploy, allennlp, blog">
+
+
+<script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/comprehension.ml\/"
+      },
+      "articleSection" : "posts",
+      "name" : "Filtrable HNSW Part 2 - Implementation",
+      "headline" : "Filtrable HNSW Part 2 - Implementation",
+      "description" : "There is a fast C\x2b\x2b implementation now. You can build, for example, geo-aware vector search with it. Examples included!",
+      "inLanguage" : "en-US",
+      "author" : "Andrey Vasnetsov",
+      "creator" : "Andrey Vasnetsov",
+      "publisher": "Andrey Vasnetsov",
+      "accountablePerson" : "Andrey Vasnetsov",
+      "copyrightHolder" : "Andrey Vasnetsov",
+      "copyrightYear" : "2020",
+      "datePublished": "2020-01-29 23:03:02 \x2b0100 CET",
+      "dateModified" : "2020-01-29 23:03:02 \x2b0100 CET",
+      "url" : "https:\/\/comprehension.ml\/posts\/categorical-hnsw-part-2\/",
+      "wordCount" : "923",
+      "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
+  }
+</script>
+
+        <title>Filtrable HNSW Part 2 - Implementation</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://comprehension.ml/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokailight.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/json.min.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.63.2" />
+        
+
+        
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56301881-3"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments)};
+              gtag('js', new Date());
+              gtag('config', 'UA-56301881-3');
+            </script>
+        
+
+        
+            <meta name="yandex-verification" content="6c7b43afecb1426c" />
+        
+
+        
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    processEscapes: true
+                }
+                });
+            </script>
+            <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+
+        
+
+    </head>
+
+    <body>
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">Filtrable HNSW Part 2 - Implementation</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://comprehension.ml/">Home</a></li>
+                            
+                                <li><a href="https://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
+                            
+                                <li><a href="https://comprehension.ml/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:vasnetsov93&#43;blog@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/generall"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://t.me/neural_network_engineering"><i class="fa fa-telegram"></i></a></li>
+                            
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+    
+        <div>
+            <h2>Filtrable HNSW Part 2 - Implementation</h2>
+            <h5>January 29, 2020</h5>
+            
+
+        </div>
+
+        <div align="start" class="content"><p>In a previous article on the filter when searching for nearest neighbors, we discussed the theoretical background:
+What can be modified in the HNSW algorithm to make it usable for search with constraints?</p>
+<p>This time I am going to present a C++ implementation with Python bindings.</p>
+<p>As a base implementation of HNSW I took <a href="https://github.com/nmslib/hnswlib">hnswlib</a>, stand-alone header-only implementation
+of HNSW.
+This library is highly performance-oriented, so it used some low-level optimization tricks which I had to remove.
+Because of it, unfortunately, I couldn&rsquo;t make a pull request to the original repository.</p>
+<h2 id="what-was-changed">What was changed?</h2>
+<p>I introduced tags. Now you can assign an arbitrary number of uint32 numbers (representing tags) to any point.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># ids - list of point ids</span>
+<span style="color:#75715e"># tag - uint32 representing some tag</span>
+<span style="color:#111">hnsw</span><span style="color:#f92672">.</span><span style="color:#111">add_tags</span><span style="color:#111">(</span><span style="color:#111">ids</span><span style="color:#111">,</span> <span style="color:#111">tag</span><span style="color:#111">)</span> 
+</code></pre></div><p>The group of points under the same tag could be searched separately from others.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">vector_to_search</span> <span style="color:#f92672">=</span> <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+<span style="color:#111">tag_to_search_in</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>  <span style="color:#75715e"># Search among points with this tag</span>
+<span style="color:#111">condition</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">[</span><span style="color:#111">(</span><span style="color:#111">False</span><span style="color:#111">,</span> <span style="color:#111">tag_to_search_in</span><span style="color:#111">)</span><span style="color:#111">]</span><span style="color:#111">]</span>
+<span style="color:#111">found_labels</span><span style="color:#111">,</span> <span style="color:#111">found_dist</span> <span style="color:#f92672">=</span> <span style="color:#111">hnsw</span><span style="color:#f92672">.</span><span style="color:#111">knn_query</span><span style="color:#111">(</span><span style="color:#111">vector_to_search</span><span style="color:#111">,</span> <span style="color:#111">k</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10</span><span style="color:#111">,</span> <span style="color:#111">conditions</span><span style="color:#f92672">=</span><span style="color:#111">condition</span><span style="color:#111">)</span>
+</code></pre></div><p>These groups could also be combined using boolean expressions.
+For example <code>(A | !B) &amp; C</code> is represented as <code>[[(0, A), (1, B)], [(0, C)]]</code>, where <code>A</code>, <code>B</code>, <code>C</code> are logical clauses if respective tag is assigned to a point.</p>
+<p>Let&rsquo;s say we need to search among multiple tags, but only a point does not have the tag <code>100</code>:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">tags_to_search_in</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span><span style="color:#ae81ff">2</span><span style="color:#111">,</span><span style="color:#ae81ff">3</span><span style="color:#111">,</span><span style="color:#ae81ff">4</span><span style="color:#111">,</span><span style="color:#ae81ff">5</span><span style="color:#111">,</span><span style="color:#ae81ff">6</span><span style="color:#111">]</span>
+
+<span style="color:#111">condition</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span>
+  <span style="color:#111">[</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#00a8c8">for</span> <span style="color:#111">x</span> <span style="color:#f92672">in</span> <span style="color:#111">tags_to_search_in</span><span style="color:#111">]</span><span style="color:#111">,</span>
+  <span style="color:#111">[</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">100</span><span style="color:#111">)</span><span style="color:#111">]</span>
+<span style="color:#111">]</span>
+
+<span style="color:#111">found_labels</span><span style="color:#111">,</span> <span style="color:#111">found_dist</span> <span style="color:#f92672">=</span> <span style="color:#111">hnsw</span><span style="color:#f92672">.</span><span style="color:#111">knn_query</span><span style="color:#111">(</span><span style="color:#111">vector_to_search</span><span style="color:#111">,</span> <span style="color:#111">k</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10</span><span style="color:#111">,</span> <span style="color:#111">conditions</span><span style="color:#f92672">=</span><span style="color:#111">condition</span><span style="color:#111">)</span>
+</code></pre></div><p>If the group is large enough ( <code>&gt;&gt; 1/M</code> fraction of all points), <code>knn_query</code> should work fine.
+But if the group is smaller, it may need to build additional connections in the HNSW graph for these groups.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">hnsw</span><span style="color:#f92672">.</span><span style="color:#111">index_tagged</span><span style="color:#111">(</span><span style="color:#111">tag</span><span style="color:#f92672">=</span><span style="color:#ae81ff">42</span><span style="color:#111">,</span> <span style="color:#111">m</span><span style="color:#f92672">=</span><span style="color:#ae81ff">8</span><span style="color:#111">)</span>
+</code></pre></div><p>If we want to search within multiple small groups, we should build connections among them:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">hnsw</span><span style="color:#f92672">.</span><span style="color:#111">index_cross_tagged</span><span style="color:#111">(</span><span style="color:#111">tags</span><span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span><span style="color:#ae81ff">2</span><span style="color:#111">,</span><span style="color:#ae81ff">3</span><span style="color:#111">]</span><span style="color:#111">,</span> <span style="color:#111">m</span><span style="color:#f92672">=</span><span style="color:#ae81ff">8</span><span style="color:#111">)</span>
+</code></pre></div><p>Additional indexing of multiple tags could also be useful if you need to emulate the filtering of continuous values like numerical or geo.
+In this case, you need to index neighbor tags, so <strong>the graph will stay connected</strong> within any selected range.</p>
+<p>You can find full example <a href="https://github.com/generall/cat_hnswlib/blob/master/CATEGORIES.md">here</a>.</p>
+<h2 id="making-vector-search-with-support-of-geo-filtering">Making vector search with support of geo-filtering.</h2>
+<p>Based on the HNSW with categorical filtering, it is possible to build build a tool that can <strong>search in specified geo-region only</strong>. A full example could be found <a href="https://github.com/generall/cat_hnswlib/blob/master/examples/geo_example.py">on GitHub</a> and here I will reveal some details.</p>
+<p>Initially we instantiate Index object with some parameters:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">hnsw</span> <span style="color:#f92672">=</span> <span style="color:#111">hnswlib</span><span style="color:#f92672">.</span><span style="color:#111">Index</span><span style="color:#111">(</span><span style="color:#111">space</span><span style="color:#f92672">=</span><span style="color:#d88200"></span><span style="color:#d88200">&#39;</span><span style="color:#d88200">cosine</span><span style="color:#d88200">&#39;</span><span style="color:#111">,</span> <span style="color:#111">dim</span><span style="color:#f92672">=</span><span style="color:#111">dim</span><span style="color:#111">)</span>
+<span style="color:#111">hnsw</span><span style="color:#f92672">.</span><span style="color:#111">init_index</span><span style="color:#111">(</span><span style="color:#111">max_elements</span> <span style="color:#f92672">=</span> <span style="color:#111">elements</span><span style="color:#111">,</span> <span style="color:#111">M</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span><span style="color:#111">,</span> <span style="color:#111">random_seed</span><span style="color:#f92672">=</span><span style="color:#ae81ff">45</span><span style="color:#111">)</span>
+<span style="color:#111">hnsw</span><span style="color:#f92672">.</span><span style="color:#111">set_num_threads</span><span style="color:#111">(</span><span style="color:#ae81ff">2</span><span style="color:#111">)</span>
+</code></pre></div><p>Then we generate some vectors (points) and corresponding geo-coordinates:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Generate random vectors and geo points</span>
+<span style="color:#111">points</span><span style="color:#111">,</span> <span style="color:#111">geo_points</span> <span style="color:#f92672">=</span> <span style="color:#111">get_random_data</span><span style="color:#111">(</span><span style="color:#111">elements</span><span style="color:#111">,</span> <span style="color:#111">dim</span><span style="color:#111">,</span> <span style="color:#111">from_lat</span><span style="color:#111">,</span> <span style="color:#111">to_lat</span><span style="color:#111">,</span> <span style="color:#111">from_lon</span><span style="color:#111">,</span> <span style="color:#111">to_lon</span><span style="color:#111">)</span>
+</code></pre></div><p>Next we add this points to the index in regular way:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">hnsw</span><span style="color:#f92672">.</span><span style="color:#111">add_items</span><span style="color:#111">(</span><span style="color:#111">points</span><span style="color:#111">)</span>
+</code></pre></div><p>After that, we need to assign geo-hashes for each point.
+We will add hashes of different lengths to support searches on different scales.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">tags_to_index</span> <span style="color:#f92672">=</span> <span style="color:#111">defaultdict</span><span style="color:#111">(</span><span style="color:#111">int</span><span style="color:#111">)</span>
+
+<span style="color:#75715e"># Collect geo-hashes for indexing</span>
+<span style="color:#00a8c8">for</span> <span style="color:#111">idx</span><span style="color:#111">,</span> <span style="color:#111">geo_point</span> <span style="color:#f92672">in</span> <span style="color:#111">enumerate</span><span style="color:#111">(</span><span style="color:#111">geo_points</span><span style="color:#111">)</span><span style="color:#111">:</span>
+    <span style="color:#111">lat</span><span style="color:#111">,</span> <span style="color:#111">lon</span> <span style="color:#f92672">=</span> <span style="color:#111">geo_point</span>
+    <span style="color:#111">ghsh</span> <span style="color:#f92672">=</span> <span style="color:#111">geohash</span><span style="color:#f92672">.</span><span style="color:#111">encode</span><span style="color:#111">(</span><span style="color:#111">lat</span><span style="color:#111">,</span> <span style="color:#111">lon</span><span style="color:#111">,</span> <span style="color:#111">precision</span><span style="color:#f92672">=</span><span style="color:#111">max_precision</span><span style="color:#111">)</span>
+    <span style="color:#75715e"># List all hashes in hierarchy: &#39;u337jk&#39; -&gt; [&#39;u&#39;, &#39;u3&#39;, &#39;u33&#39;, &#39;u337&#39;, &#39;u337j&#39;, &#39;u337jk&#39;] </span>
+    <span style="color:#111">tags</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">ghsh</span><span style="color:#111">[</span><span style="color:#111">:</span><span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">]</span> <span style="color:#00a8c8">for</span> <span style="color:#111">i</span> <span style="color:#f92672">in</span> <span style="color:#111">range</span><span style="color:#111">(</span><span style="color:#111">max_precision</span><span style="color:#111">)</span><span style="color:#111">]</span>
+
+    <span style="color:#75715e"># Save small geo-hashes for further indexing</span>
+    <span style="color:#111">tags_to_index</span><span style="color:#111">[</span><span style="color:#111">ghsh</span><span style="color:#111">[</span><span style="color:#111">:</span><span style="color:#111">max_precision</span><span style="color:#111">]</span><span style="color:#111">]</span> <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#111">tags_to_index</span><span style="color:#111">[</span><span style="color:#111">ghsh</span><span style="color:#111">[</span><span style="color:#111">:</span><span style="color:#111">max_precision</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#111">]</span><span style="color:#111">]</span> <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+    
+    <span style="color:#75715e"># Assign geo-hashes to points</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">tag</span> <span style="color:#f92672">in</span> <span style="color:#111">tags</span><span style="color:#111">:</span>
+        <span style="color:#111">hnsw</span><span style="color:#f92672">.</span><span style="color:#111">add_tags</span><span style="color:#111">(</span><span style="color:#111">[</span><span style="color:#111">idx</span><span style="color:#111">]</span><span style="color:#111">,</span> <span style="color:#111">geohash2int</span><span style="color:#111">(</span><span style="color:#111">tag</span><span style="color:#111">)</span><span style="color:#111">)</span>
+</code></pre></div><p>Now we can additionally index selected regions:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Additionally index points inside small regions </span>
+<span style="color:#00a8c8">for</span> <span style="color:#111">tag</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#f92672">.</span><span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">tags_to_index</span><span style="color:#111">)</span><span style="color:#111">:</span>
+    <span style="color:#75715e"># This will create additional links in a graph for each geohash region.</span>
+    <span style="color:#75715e"># So search should work on nodes inside this region only.</span>
+    <span style="color:#111">hnsw</span><span style="color:#f92672">.</span><span style="color:#111">index_tagged</span><span style="color:#111">(</span><span style="color:#111">geohash2int</span><span style="color:#111">(</span><span style="color:#111">tag</span><span style="color:#111">)</span><span style="color:#111">)</span>
+    <span style="color:#75715e"># With M=16 additional indexing is only required for regions containing less than ~5% of all points</span>
+    <span style="color:#75715e"># Additional info here: https://comprehension.ml/posts/categorical-hnsw/</span>
+
+<span style="color:#00a8c8">for</span> <span style="color:#111">tag</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#f92672">.</span><span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">tags_to_index</span><span style="color:#111">)</span><span style="color:#111">:</span>
+    <span style="color:#75715e"># This code will also create additional connections between points in neighbor regions.</span>
+    <span style="color:#75715e"># So search in multiple neighbor regions will also work</span>
+    <span style="color:#111">neighbors</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">geohash2int</span><span style="color:#111">(</span><span style="color:#111">ntag</span><span style="color:#111">)</span> <span style="color:#00a8c8">for</span> <span style="color:#111">ntag</span> <span style="color:#f92672">in</span> <span style="color:#111">geohash</span><span style="color:#f92672">.</span><span style="color:#111">neighbors</span><span style="color:#111">(</span><span style="color:#111">tag</span><span style="color:#111">)</span> <span style="color:#00a8c8">if</span> <span style="color:#111">ntag</span> <span style="color:#f92672">in</span> <span style="color:#111">tags_to_index</span><span style="color:#111">]</span>
+    <span style="color:#111">hnsw</span><span style="color:#f92672">.</span><span style="color:#111">index_cross_tagged</span><span style="color:#111">(</span><span style="color:#111">neighbors</span><span style="color:#111">)</span>
+</code></pre></div><p>And finally, we can query for the closest vector in a specified region:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Generate integer tag from geohash</span>
+<span style="color:#111">target_ghsh</span> <span style="color:#f92672">=</span> <span style="color:#111">geohash</span><span style="color:#f92672">.</span><span style="color:#111">encode</span><span style="color:#111">(</span><span style="color:#111">target_lat</span><span style="color:#111">,</span> <span style="color:#111">target_lon</span><span style="color:#111">,</span> <span style="color:#111">precision</span><span style="color:#f92672">=</span><span style="color:#111">target_precision</span><span style="color:#111">)</span>
+<span style="color:#111">target_tag</span> <span style="color:#f92672">=</span> <span style="color:#111">geohash2int</span><span style="color:#111">(</span><span style="color:#111">target_ghsh</span><span style="color:#111">)</span>
+
+<span style="color:#75715e"># Obtain search condition from geohash</span>
+<span style="color:#75715e"># You can also search in multiple squares with conjunction: </span>
+<span style="color:#75715e"># [[(False, hash1), (False, hash2), ..., (False, hashN)]]</span>
+<span style="color:#111">condition</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">[</span><span style="color:#111">(</span><span style="color:#111">False</span><span style="color:#111">,</span> <span style="color:#111">target_tag</span><span style="color:#111">)</span><span style="color:#111">]</span><span style="color:#111">]</span>
+
+<span style="color:#111">found</span><span style="color:#111">,</span> <span style="color:#111">dist</span> <span style="color:#f92672">=</span> <span style="color:#111">hnsw</span><span style="color:#f92672">.</span><span style="color:#111">knn_query</span><span style="color:#111">(</span><span style="color:#111">target_query</span><span style="color:#111">,</span> <span style="color:#111">k</span><span style="color:#f92672">=</span><span style="color:#ae81ff">3</span><span style="color:#111">,</span> <span style="color:#111">conditions</span><span style="color:#f92672">=</span><span style="color:#111">condition</span><span style="color:#111">)</span>
+</code></pre></div><h1 id="further-work">Further work</h1>
+<p>Sometimes the selected subset is too small, so it would be faster to just brute-force all points.
+In other cases, if query constraints consist of multiple tag conjunctions, it might be faster to parallel this query.
+In other words, it would be useful to have a high level <strong>query planner</strong> for the searcher.</p>
+<p>Another potential challenge one can face building a vector search system is scaling.
+One solution is <strong>quantization</strong>, but it does not provide a horizontal scaling of the search.
+Another approach used, for example, in ElasticSearch, is to <strong>shard</strong> data on multiple machines.
+In this case, each worker searches in its part of the data.
+And the final result is obtained from a combination of top shard hits.</p>
+<p>The implementation of these ideas can result in an exciting project.
+It could be a service providing API for searching and indexing data of different types but based on categorical HSNW vector search rather than a regular inverted index.
+This service should take on the maintenance of data integrity, sharding and query planning.</p>
+<p>The closest analog that I could find is a <a href="https://github.com/milvus-io/milvus">milvus</a>, and it does not support features, presented in this note.</p>
+<p>Feel free to <a href="https://t.me/generall93">contact</a> me if you need any additional information on this or any other of my projects.</p>
+</div>
+
+        
+        
+        
+
+        
+        
+    
+</main>
+
+        <footer>
+            <p class="copyright text-muted">© All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a>.</p>
+        </footer>
+
+        
+
+        
+    </body>
+
+</html>
+
