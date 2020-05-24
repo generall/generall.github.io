@@ -94,7 +94,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.63.2" />
+ <meta name="generator" content="Hugo 0.70.0" />
         
 
         
@@ -192,18 +192,18 @@ Once the model is converted, you can retrieve vectors with <code>get_word_vector
 <p><img src="https://comprehension.ml/img/timeit_wv.png" alt="mmap speed"></p>
 <h2 id="bonus-cpu-or-gpu">Bonus: CPU or GPU?</h2>
 <p>If you have enough RAM to store embeddings, but you are still in doubt if it worth to put it on GPU or make your batch a little larger, here are some experiments:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">on_cuda</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">:</span>
-    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">np</span><span style="color:#f92672">.</span><span style="color:#111">random</span><span style="color:#f92672">.</span><span style="color:#111">randint</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#ae81ff">100000</span><span style="color:#111">,</span> <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#ae81ff">100</span><span style="color:#111">,</span> <span style="color:#ae81ff">100</span><span style="color:#111">)</span><span style="color:#111">)</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">on_cuda</span><span style="color:#111">():</span>
+    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">np</span><span style="color:#f92672">.</span><span style="color:#111">random</span><span style="color:#f92672">.</span><span style="color:#111">randint</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#ae81ff">100000</span><span style="color:#111">,</span> <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#ae81ff">100</span><span style="color:#111">,</span> <span style="color:#ae81ff">100</span><span style="color:#111">))</span>
     <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">torch</span><span style="color:#f92672">.</span><span style="color:#111">from_numpy</span><span style="color:#111">(</span><span style="color:#111">batch</span><span style="color:#111">)</span>
-    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">batch</span><span style="color:#f92672">.</span><span style="color:#111">cuda</span><span style="color:#111">(</span><span style="color:#111">)</span>
+    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">batch</span><span style="color:#f92672">.</span><span style="color:#111">cuda</span><span style="color:#111">()</span>
     <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">emb</span><span style="color:#111">(</span><span style="color:#111">batch</span><span style="color:#111">)</span>
     <span style="color:#00a8c8">return</span> <span style="color:#111">batch</span>
 
-<span style="color:#00a8c8">def</span> <span style="color:#75af00">on_cpu</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">:</span>
-    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">np</span><span style="color:#f92672">.</span><span style="color:#111">random</span><span style="color:#f92672">.</span><span style="color:#111">randint</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#ae81ff">100000</span><span style="color:#111">,</span> <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#ae81ff">100</span><span style="color:#111">,</span> <span style="color:#ae81ff">100</span><span style="color:#111">)</span><span style="color:#111">)</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">on_cpu</span><span style="color:#111">():</span>
+    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">np</span><span style="color:#f92672">.</span><span style="color:#111">random</span><span style="color:#f92672">.</span><span style="color:#111">randint</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#ae81ff">100000</span><span style="color:#111">,</span> <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#ae81ff">100</span><span style="color:#111">,</span> <span style="color:#ae81ff">100</span><span style="color:#111">))</span>
     <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">emb_np</span><span style="color:#111">[</span><span style="color:#111">batch</span><span style="color:#111">]</span>
     <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">torch</span><span style="color:#f92672">.</span><span style="color:#111">from_numpy</span><span style="color:#111">(</span><span style="color:#111">batch</span><span style="color:#111">)</span>
-    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">batch</span><span style="color:#f92672">.</span><span style="color:#111">cuda</span><span style="color:#111">(</span><span style="color:#111">)</span>
+    <span style="color:#111">batch</span> <span style="color:#f92672">=</span> <span style="color:#111">batch</span><span style="color:#f92672">.</span><span style="color:#111">cuda</span><span style="color:#111">()</span>
     <span style="color:#00a8c8">return</span> <span style="color:#111">batch</span>
 </code></pre></div><p><img src="https://comprehension.ml/img/gpu_vs_cpu_embeddings.png" alt="GPU vs CPU Embeddings"></p>
 <p>It appears that storing embeddings on GPU is almost 40 times faster than convert them afterwards.

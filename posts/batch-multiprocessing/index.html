@@ -94,7 +94,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.63.2" />
+ <meta name="generator" content="Hugo 0.70.0" />
         
 
         
@@ -183,45 +183,45 @@ Unfortunately <code>DataLoader</code> suffers lack of flexibility. It&rsquo;s im
 <p><code>multiprocessing</code> gives us a set of useful APIs to distribute computations among several processes. Processes does not share memory with each other, so data is transmitted via inter-process communication protocols. For example in linux-like operation systems <code>multiprocessing</code> uses pipes. Such organization leads to some pitfalls that I am going to tell you.</p>
 <h2 id="map-vs-imap"><code>map</code> vs <code>imap</code></h2>
 <p>Methods <code>map</code> and <code>imap</code> may be used to apply preprocessing to batches. Both of them take processing function and iterable as argument. The difference is that <code>imap</code> is lazy. It will return processed elements as soon as they are ready. In this case all processed batched should not be stored in RAM simultaneously. For training NN you should always prefer <code>imap</code>:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">process</span><span style="color:#111">(</span><span style="color:#111">batch_reader</span><span style="color:#111">)</span><span style="color:#111">:</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">process</span><span style="color:#111">(</span><span style="color:#111">batch_reader</span><span style="color:#111">):</span>
     <span style="color:#00a8c8">with</span> <span style="color:#111">Pool</span><span style="color:#111">(</span><span style="color:#111">threads</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">pool</span><span style="color:#111">:</span>
-        <span style="color:#00a8c8">for</span> <span style="color:#111">batch</span> <span style="color:#f92672">in</span> <span style="color:#111">pool</span><span style="color:#f92672">.</span><span style="color:#111">imap</span><span style="color:#111">(</span><span style="color:#111">foo</span><span style="color:#111">,</span> <span style="color:#111">batch_reader</span><span style="color:#111">)</span><span style="color:#111">:</span>
-            <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+        <span style="color:#00a8c8">for</span> <span style="color:#111">batch</span> <span style="color:#f92672">in</span> <span style="color:#111">pool</span><span style="color:#f92672">.</span><span style="color:#111">imap</span><span style="color:#111">(</span><span style="color:#111">foo</span><span style="color:#111">,</span> <span style="color:#111">batch_reader</span><span style="color:#111">):</span>
+            <span style="color:#f92672">....</span>
             <span style="color:#00a8c8">yield</span> <span style="color:#111">batch</span>
-            <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+            <span style="color:#f92672">....</span>
 </code></pre></div><h2 id="serialization">Serialization</h2>
 <p>Other pitfall is associated with the need to transfer objects via pipes. In addition to the processing results, <code>multiprocessing</code> will also serialize transformation object if it is used like this: <code>pool.imap(transformer.foo, batch_reader)</code>. <code>transformer</code> will be serialized and send to subprocess. It may lead to some problems if <code>transformer</code> object has large properties. In this case it may be better to store large properties as singleton class variables:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Transformer</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">:</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Transformer</span><span style="color:#111">():</span>
     <span style="color:#111">large_dictinary</span> <span style="color:#f92672">=</span> <span style="color:#111">None</span>
 
-    <span style="color:#00a8c8">def</span> <span style="color:#111">__init__</span><span style="color:#111">(</span><span style="color:#111">self</span><span style="color:#111">,</span> <span style="color:#111">large_dictinary</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#111">kwargs</span><span style="color:#111">)</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">def</span> <span style="color:#111">__init__</span><span style="color:#111">(</span><span style="color:#111">self</span><span style="color:#111">,</span> <span style="color:#111">large_dictinary</span><span style="color:#111">,</span> <span style="color:#f92672">**</span><span style="color:#111">kwargs</span><span style="color:#111">):</span>
         <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">__class__</span><span style="color:#f92672">.</span><span style="color:#111">large_dictinary</span> <span style="color:#f92672">=</span> <span style="color:#111">large_dictinary</span>
 
-    <span style="color:#00a8c8">def</span> <span style="color:#75af00">foo</span><span style="color:#111">(</span><span style="color:#111">self</span><span style="color:#111">,</span> <span style="color:#111">x</span><span style="color:#111">)</span><span style="color:#111">:</span>
-        <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+    <span style="color:#00a8c8">def</span> <span style="color:#75af00">foo</span><span style="color:#111">(</span><span style="color:#111">self</span><span style="color:#111">,</span> <span style="color:#111">x</span><span style="color:#111">):</span>
+        <span style="color:#f92672">....</span>
         <span style="color:#111">y</span> <span style="color:#f92672">=</span> <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">large_dictinary</span><span style="color:#111">[</span><span style="color:#111">x</span><span style="color:#111">]</span>
-        <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+        <span style="color:#f92672">....</span>
 </code></pre></div><p>Another difficulty that you may encounter is if the preprocessor is faster than GPU learning. In this case unprocessed batches accumulate in memory. If your memory is not to large enough you will get Out-of-Memory error. One way to solve this problem is to limit batch preprocessing until GPU learning is done.
 <code>Semaphore</code> is perfect solution for this task:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">batch_reader</span><span style="color:#111">(</span><span style="color:#111">semaphore</span><span style="color:#111">)</span><span style="color:#111">:</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">batch_reader</span><span style="color:#111">(</span><span style="color:#111">semaphore</span><span style="color:#111">):</span>
     <span style="color:#00a8c8">for</span> <span style="color:#111">batch</span> <span style="color:#f92672">in</span> <span style="color:#111">source</span><span style="color:#111">:</span>
-        <span style="color:#111">semaphore</span><span style="color:#f92672">.</span><span style="color:#111">acquire</span><span style="color:#111">(</span><span style="color:#111">)</span>
+        <span style="color:#111">semaphore</span><span style="color:#f92672">.</span><span style="color:#111">acquire</span><span style="color:#111">()</span>
         <span style="color:#00a8c8">yield</span> <span style="color:#111">batch</span>
 
 
-<span style="color:#00a8c8">def</span> <span style="color:#75af00">process</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">)</span><span style="color:#111">:</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">process</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">):</span>
     <span style="color:#00a8c8">return</span> <span style="color:#111">x</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
 
 
-<span style="color:#00a8c8">def</span> <span style="color:#75af00">pooling</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">:</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">pooling</span><span style="color:#111">():</span>
     <span style="color:#00a8c8">with</span> <span style="color:#111">Pool</span><span style="color:#111">(</span><span style="color:#111">threads</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">pool</span><span style="color:#111">:</span>
         <span style="color:#111">semaphore</span> <span style="color:#f92672">=</span> <span style="color:#111">Semaphore</span><span style="color:#111">(</span><span style="color:#111">limit</span><span style="color:#111">)</span>
-        <span style="color:#00a8c8">for</span> <span style="color:#111">x</span> <span style="color:#f92672">in</span> <span style="color:#111">pool</span><span style="color:#f92672">.</span><span style="color:#111">imap</span><span style="color:#111">(</span><span style="color:#111">plus</span><span style="color:#111">,</span> <span style="color:#111">batch_reader</span><span style="color:#111">(</span><span style="color:#111">semaphore</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">for</span> <span style="color:#111">x</span> <span style="color:#f92672">in</span> <span style="color:#111">pool</span><span style="color:#f92672">.</span><span style="color:#111">imap</span><span style="color:#111">(</span><span style="color:#111">plus</span><span style="color:#111">,</span> <span style="color:#111">batch_reader</span><span style="color:#111">(</span><span style="color:#111">semaphore</span><span style="color:#111">)):</span>
             <span style="color:#00a8c8">yield</span> <span style="color:#111">x</span>
-            <span style="color:#111">semaphore</span><span style="color:#f92672">.</span><span style="color:#111">release</span><span style="color:#111">(</span><span style="color:#111">)</span>
+            <span style="color:#111">semaphore</span><span style="color:#f92672">.</span><span style="color:#111">release</span><span style="color:#111">()</span>
 
 
-<span style="color:#00a8c8">for</span> <span style="color:#111">x</span> <span style="color:#f92672">in</span> <span style="color:#111">pooling</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">:</span>
+<span style="color:#00a8c8">for</span> <span style="color:#111">x</span> <span style="color:#f92672">in</span> <span style="color:#111">pooling</span><span style="color:#111">():</span>
     <span style="color:#111">learn_gpu</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">)</span>
 </code></pre></div><p><code>Semaphore</code> has internal counter syncronized across all working processes. It&rsquo;s logic will block execution if some process tries to increase counet value above limit with <code>semaphore.acquire()</code></p>
 </div>

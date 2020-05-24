@@ -94,7 +94,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.63.2" />
+ <meta name="generator" content="Hugo 0.70.0" />
         
 
         
@@ -227,16 +227,16 @@ In this case, the amount of n-grams candidates for a single id will not exceed <
 One way to do it is to measure the similarity between vocab vectors of the original model and reconstructed from n-grams vectors of a new model.</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">test_vocab_size</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span><span style="color:#111">_000</span>
 <span style="color:#111">test_vocab</span> <span style="color:#f92672">=</span> <span style="color:#111">sorted_vocab</span><span style="color:#111">[</span><span style="color:#111">new_vocab_size</span><span style="color:#111">:</span><span style="color:#111">new_vocab_size</span> <span style="color:#f92672">+</span> <span style="color:#111">test_vocab_size</span><span style="color:#111">]</span>
-<span style="color:#111">sims</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">]</span>
+<span style="color:#111">sims</span> <span style="color:#f92672">=</span> <span style="color:#111">[]</span>
 <span style="color:#00a8c8">for</span> <span style="color:#111">test_word</span><span style="color:#111">,</span> <span style="color:#111">_</span> <span style="color:#f92672">in</span> <span style="color:#111">test_vocab</span><span style="color:#111">:</span>
     <span style="color:#111">sim</span> <span style="color:#f92672">=</span> <span style="color:#111">ft</span><span style="color:#f92672">.</span><span style="color:#111">cosine_similarities</span><span style="color:#111">(</span>
-      <span style="color:#111">ft</span><span style="color:#f92672">.</span><span style="color:#111">get_vector</span><span style="color:#111">(</span><span style="color:#111">test_word</span><span style="color:#111">)</span><span style="color:#111">,</span>
-      <span style="color:#111">[</span><span style="color:#111">new_ft</span><span style="color:#f92672">.</span><span style="color:#111">get_vector</span><span style="color:#111">(</span><span style="color:#111">test_word</span><span style="color:#111">)</span><span style="color:#111">]</span>
+      <span style="color:#111">ft</span><span style="color:#f92672">.</span><span style="color:#111">get_vector</span><span style="color:#111">(</span><span style="color:#111">test_word</span><span style="color:#111">),</span>
+      <span style="color:#111">[</span><span style="color:#111">new_ft</span><span style="color:#f92672">.</span><span style="color:#111">get_vector</span><span style="color:#111">(</span><span style="color:#111">test_word</span><span style="color:#111">)]</span>
     <span style="color:#111">)</span>
-    <span style="color:#00a8c8">if</span> <span style="color:#f92672">not</span> <span style="color:#111">np</span><span style="color:#f92672">.</span><span style="color:#111">isnan</span><span style="color:#111">(</span><span style="color:#111">sim</span><span style="color:#111">)</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#f92672">not</span> <span style="color:#111">np</span><span style="color:#f92672">.</span><span style="color:#111">isnan</span><span style="color:#111">(</span><span style="color:#111">sim</span><span style="color:#111">):</span>
         <span style="color:#111">sims</span><span style="color:#f92672">.</span><span style="color:#111">append</span><span style="color:#111">(</span><span style="color:#111">sim</span><span style="color:#111">)</span>
 
-<span style="color:#00a8c8">print</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Similarity:</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">np</span><span style="color:#f92672">.</span><span style="color:#111">sum</span><span style="color:#111">(</span><span style="color:#111">sims</span><span style="color:#111">)</span> <span style="color:#f92672">/</span> <span style="color:#111">test_vocab_size</span><span style="color:#111">)</span>
+<span style="color:#00a8c8">print</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Similarity:&#34;</span><span style="color:#111">,</span> <span style="color:#111">np</span><span style="color:#f92672">.</span><span style="color:#111">sum</span><span style="color:#111">(</span><span style="color:#111">sims</span><span style="color:#111">)</span> <span style="color:#f92672">/</span> <span style="color:#111">test_vocab_size</span><span style="color:#111">)</span>
 </code></pre></div><p>The closer similarity value is to 1, the more information is preserved.</p>
 <p>Here is a comparison of a resulting similarity with different params.</p>
 <pre><code>+-----------------+----------------+------------+
