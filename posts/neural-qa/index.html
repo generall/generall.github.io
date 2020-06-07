@@ -16,7 +16,7 @@
       "@type" : "BlogPosting",
       "mainEntityOfPage": {
            "@type": "WebPage",
-           "@id": "https:\/\/comprehension.ml\/"
+           "@id": "https:\/\/blog.vasnetsov.com\/"
       },
       "articleSection" : "posts",
       "name" : "Neural QA",
@@ -31,7 +31,7 @@
       "copyrightYear" : "2018",
       "datePublished": "2018-09-17 01:49:05 \u002b0300 \u002b0300",
       "dateModified" : "2018-09-17 01:49:05 \u002b0300 \u002b0300",
-      "url" : "https:\/\/comprehension.ml\/posts\/neural-qa\/",
+      "url" : "https:\/\/blog.vasnetsov.com\/posts\/neural-qa\/",
       "wordCount" : "281",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
   }
@@ -54,7 +54,7 @@
 </style>
 
 
-<link rel="stylesheet" href="https://comprehension.ml/css/main.css">
+<link rel="stylesheet" href="https://blog.vasnetsov.com/css/main.css">
 
 
 
@@ -143,18 +143,18 @@
                     
                         <ul class="nav navbar-nav">
                             
-                                <li><a href="https://comprehension.ml/">Home</a></li>
+                                <li><a href="https://blog.vasnetsov.com/">Home</a></li>
                             
-                                <li><a href="https://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
+                                <li><a href="https://blog.vasnetsov.com/andrey_vasnetsov_cv.pdf">CV</a></li>
                             
-                                <li><a href="https://comprehension.ml/posts/">Posts</a></li>
+                                <li><a href="https://blog.vasnetsov.com/posts/">Posts</a></li>
                             
                         </ul>
                     
                     
                         <ul class="nav navbar-nav navbar-right">
                             
-                                <li class="navbar-icon"><a href="mailto:vasnetsov93&#43;blog@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                                <li class="navbar-icon"><a href="mailto:andrey&#43;blog@vasnetsov.com"><i class="fa fa-envelope-o"></i></a></li>
                             
                                 <li class="navbar-icon"><a href="https://github.com/generall"><i class="fa fa-github"></i></a></li>
                             
@@ -197,7 +197,7 @@ c. Textual question in special query language - projects like <a href="https://g
 d. Textual question in free form - model is supposed to some-how encode the text of questions.</p>
 <p>For example <a href="https://towardsdatascience.com/nlp-building-a-question-answering-model-ed0529a68c54">this article</a> deals with combination <code>C-2-d</code> in this categorization.
 This combination leads to the necessity of using complex bi-directional attention mechanisms like <a href="https://allenai.github.io/bi-att-flow/">BiDAF</a>.</p>
-<p><img src="https://comprehension.ml/img/BiDAF.png" alt="BiDAF"></p>
+<p><img src="https://blog.vasnetsov.com/img/BiDAF.png" alt="BiDAF"></p>
 <p>I, on the contrary, want to concentrate on generating answers without initial markup in the form of answer boundaries. And I will not care about complex question representations, for now.
 Let&rsquo;s start with synthetic data baseline as it is described in my previous posts.
 In this <a href="https://github.com/generall/OneShotNLP/blob/master/SyntheticQA.ipynb">notebook</a> I wrote a list of data generators. Each one is slightly more complicated than the previous one.

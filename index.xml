@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>COMPREHENSION.ML</title>
-    <link>https://comprehension.ml/</link>
-    <description>Recent content on COMPREHENSION.ML</description>
+    <title>Andrey Vasnetsov`s tech blog</title>
+    <link>https://blog.vasnetsov.com/</link>
+    <description>Recent content on Andrey Vasnetsov`s tech blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 29 Jan 2020 23:03:02 +0100</lastBuildDate>
     
-	<atom:link href="https://comprehension.ml/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.vasnetsov.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Filtrable HNSW Part 2 - Implementation</title>
-      <link>https://comprehension.ml/posts/categorical-hnsw-part-2/</link>
+      <link>https://blog.vasnetsov.com/posts/categorical-hnsw-part-2/</link>
       <pubDate>Wed, 29 Jan 2020 23:03:02 +0100</pubDate>
       
-      <guid>https://comprehension.ml/posts/categorical-hnsw-part-2/</guid>
+      <guid>https://blog.vasnetsov.com/posts/categorical-hnsw-part-2/</guid>
       <description>In a previous article on the filter when searching for nearest neighbors, we discussed the theoretical background: What can be modified in the HNSW algorithm to make it usable for search with constraints?
 This time I am going to present a C++ implementation with Python bindings.
 As a base implementation of HNSW I took hnswlib, stand-alone header-only implementation of HNSW. This library is highly performance-oriented, so it used some low-level optimization tricks which I had to remove.</description>
@@ -24,29 +24,29 @@ As a base implementation of HNSW I took hnswlib, stand-alone header-only impleme
     
     <item>
       <title>Tsetlin Machine</title>
-      <link>https://comprehension.ml/posts/tsetlin-machine/</link>
+      <link>https://blog.vasnetsov.com/posts/tsetlin-machine/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://comprehension.ml/posts/tsetlin-machine/</guid>
+      <guid>https://blog.vasnetsov.com/posts/tsetlin-machine/</guid>
       <description>Recently I found an interesting repository on GitHub. Actually, it is not a single repository, but a whole project, created by a CAIR center for research at the University of Agder. It includes a bunch of articles and different implementations of a novel concept called Tsetlin Machine. The author claims that this approach can replace neural networks and is faster and more accurate. This work itself looks quite marginal, it&amp;rsquo;s not recent but didn&amp;rsquo;t become widely used.</description>
     </item>
     
     <item>
       <title>Filterable approximate nearest neighbors search</title>
-      <link>https://comprehension.ml/posts/categorical-hnsw/</link>
+      <link>https://blog.vasnetsov.com/posts/categorical-hnsw/</link>
       <pubDate>Sun, 24 Nov 2019 22:44:08 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/categorical-hnsw/</guid>
+      <guid>https://blog.vasnetsov.com/posts/categorical-hnsw/</guid>
       <description>If you need to find some similar objects in vector space, provided e.g. by embeddings or matching NN, you can choose among a variety of libraries: Annoy, FAISS or NMSLib. All of them will give you a fast approximate neighbors search within almost any space.
 But what if you need to introduce some constraints in your search? For example, you want search only for products in some category or select the most similar customer of a particular brand.</description>
     </item>
     
     <item>
       <title>Partially trainable embeddings</title>
-      <link>https://comprehension.ml/posts/partial-embeddings/</link>
+      <link>https://blog.vasnetsov.com/posts/partial-embeddings/</link>
       <pubDate>Sun, 10 Nov 2019 23:52:52 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/partial-embeddings/</guid>
+      <guid>https://blog.vasnetsov.com/posts/partial-embeddings/</guid>
       <description>Understanding the meaning of natural language require a huge amount of information to be arranged by a neural network. And the largest part if this information is usually stored in word embeddings.
 Typically, labeled data from a particular task is not enough to train so many parameters. Thus, word embeddings are trained separately on a large general-purpose corpora.
 But there are some cases when we want to be able to train word embeddings in our custom task, for example:</description>
@@ -54,19 +54,19 @@ But there are some cases when we want to be able to train word embeddings in our
     
     <item>
       <title>Category Prediction</title>
-      <link>https://comprehension.ml/posts/category-prediction/</link>
+      <link>https://blog.vasnetsov.com/posts/category-prediction/</link>
       <pubDate>Mon, 27 May 2019 01:36:43 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/category-prediction/</guid>
+      <guid>https://blog.vasnetsov.com/posts/category-prediction/</guid>
       <description>Have finished building demo and landing page for my project on mention classification. The idea of this project is to create a model which can assign some labels to objects based on their mentions in context. Right now it works only for people mentions, but if I find interest in this work, I will extend the model to other types like organizations or events. For now, you can check out the online demo of the neural network.</description>
     </item>
     
     <item>
       <title>Shrincking Fasttext</title>
-      <link>https://comprehension.ml/posts/shrincking-fasttext/</link>
+      <link>https://blog.vasnetsov.com/posts/shrincking-fasttext/</link>
       <pubDate>Sun, 28 Apr 2019 01:47:20 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/shrincking-fasttext/</guid>
+      <guid>https://blog.vasnetsov.com/posts/shrincking-fasttext/</guid>
       <description>Pretrained fastText embeddings are great. They were trained on a many languages, carry subword information, support OOV words.
 But their main disadvantage is the size. Even compressed version of the binary model takes 5.4Gb. This fact makes it impossible to use pretrained models on a laptop or a small VM instances.
 Being loaded into RAM, this model takes even more memory ~ 16Gb. So you can&amp;rsquo;t use it directly with Google Colab, which only gives you 12 GB of RAM.</description>
@@ -74,29 +74,29 @@ Being loaded into RAM, this model takes even more memory ~ 16Gb. So you can&amp;
     
     <item>
       <title>Memory Augmented</title>
-      <link>https://comprehension.ml/posts/memory-augmented/</link>
+      <link>https://blog.vasnetsov.com/posts/memory-augmented/</link>
       <pubDate>Fri, 15 Feb 2019 01:48:18 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/memory-augmented/</guid>
+      <guid>https://blog.vasnetsov.com/posts/memory-augmented/</guid>
       <description>Neural networks achieved great success at various NLP tasks, however, they are limited at handling infrequent patterns. In this article, the problem is described in the context of machine translation task.
 The authors noted that NMT is good at learning translation pairs that are frequently observed, but the system may ‘forget’ to use low-frequency pairs when they should be. In contrast, in traditional rule-based systems, low-frequency pairs cannot be smoothed out no matter how rare they are.</description>
     </item>
     
     <item>
       <title>Allennlp Seq2seq</title>
-      <link>https://comprehension.ml/posts/allennlp-seq2seq/</link>
+      <link>https://blog.vasnetsov.com/posts/allennlp-seq2seq/</link>
       <pubDate>Fri, 28 Dec 2018 01:48:45 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/allennlp-seq2seq/</guid>
+      <guid>https://blog.vasnetsov.com/posts/allennlp-seq2seq/</guid>
       <description>Let&amp;rsquo;s continue to dive into Question Answering. Last time we have generated several variants of synthetic sequences, from which we need to extract &amp;ldquo;answers&amp;rdquo;. Each sequence type has each own pattern, and we want a neural network to find it. In a most general sense, this task looks like sequence transformation - Seq2seq, similar to NMT. In this post, I will describe how to implement a simple Seq2seq network with AllenNLP framework.</description>
     </item>
     
     <item>
       <title>Neural QA</title>
-      <link>https://comprehension.ml/posts/neural-qa/</link>
+      <link>https://blog.vasnetsov.com/posts/neural-qa/</link>
       <pubDate>Mon, 17 Sep 2018 01:49:05 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/neural-qa/</guid>
+      <guid>https://blog.vasnetsov.com/posts/neural-qa/</guid>
       <description>Another approach to transfer learning in NLP is Question Answering. In the most general case Question Answering is the generation of a textual answer to a given question by a given set of facts in some form. You can find a demo of QA system here
 There are many types of this systems:
 Categorized by facts representation:
@@ -105,30 +105,30 @@ A. Relational database B. Complex data structure - ontology, semantic web, e.t.c
     
     <item>
       <title>On-Disk Embeddings</title>
-      <link>https://comprehension.ml/posts/on-disk-fasttext/</link>
+      <link>https://blog.vasnetsov.com/posts/on-disk-fasttext/</link>
       <pubDate>Sat, 04 Aug 2018 01:49:45 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/on-disk-fasttext/</guid>
+      <guid>https://blog.vasnetsov.com/posts/on-disk-fasttext/</guid>
       <description>There are some cases when you need to run your model on a small instance. For example, if your model is being called 1 time per hour or you just don&amp;rsquo;t want to pay $150 per month to Amazon for t2.2xlarge instance with 32Gb RAM. The problem is that the size of most pre-trained word embeddings can reach tens of gigabytes.
 In this post, I will describe the method of access word vectors without loading it into memory.</description>
     </item>
     
     <item>
       <title>Parallel preprocessing</title>
-      <link>https://comprehension.ml/posts/batch-multiprocessing/</link>
+      <link>https://blog.vasnetsov.com/posts/batch-multiprocessing/</link>
       <pubDate>Tue, 24 Jul 2018 01:50:06 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/batch-multiprocessing/</guid>
+      <guid>https://blog.vasnetsov.com/posts/batch-multiprocessing/</guid>
       <description>Using multiple processes to construct train batches may significantly reduce total training time of your network. Basically, if you are using GPU for training, you can reduce additional batch construction time almost to zero. This is achieved through pipelining of computations: while GPU crunches numbers, CPU makes preprocessing. Python multiprocessing module allows us to implement such pipelining as elegant as it is possible in the language with GIL.
 PyTorch DataLoader class, for example, also uses multiprocessing in it&amp;rsquo;s internals.</description>
     </item>
     
     <item>
       <title>FastText embeddings done right</title>
-      <link>https://comprehension.ml/posts/embedding-bag/</link>
+      <link>https://blog.vasnetsov.com/posts/embedding-bag/</link>
       <pubDate>Fri, 13 Jul 2018 01:50:27 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/embedding-bag/</guid>
+      <guid>https://blog.vasnetsov.com/posts/embedding-bag/</guid>
       <description>An important feature of FastText embeddings is the usage of subword information. In addition to the vocabulary FastText also contains word&amp;rsquo;s ngrams. This additional information is useful for the following: handling Out-Of-Vocabulary words, extracting sense from word&amp;rsquo;s etymology and dealing with misspellings.
 But unfortunately all this advantages are not used in most open source projects. We can easily discover it via GitHub.
 The point is that regular Embedding layer maps the whole word into a single, stored in memory, fixed vector.</description>
@@ -136,47 +136,47 @@ The point is that regular Embedding layer maps the whole word into a single, sto
     
     <item>
       <title>Loss function porn</title>
-      <link>https://comprehension.ml/posts/nn-param-experiments/</link>
+      <link>https://blog.vasnetsov.com/posts/nn-param-experiments/</link>
       <pubDate>Mon, 09 Jul 2018 01:50:58 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/nn-param-experiments/</guid>
+      <guid>https://blog.vasnetsov.com/posts/nn-param-experiments/</guid>
       <description>CDSSM overfitting ARC-II doing well tanh (blue) vs ReLU (orange) Dropout effect  Green - 0% dropout. Overfitting Gray - 10% dropout. Best learning Orange - 20% dropout. Blue - 30% dropout. Underfitting  </description>
     </item>
     
     <item>
       <title>Neural Networks debugging</title>
-      <link>https://comprehension.ml/posts/neural-debugging/</link>
+      <link>https://blog.vasnetsov.com/posts/neural-debugging/</link>
       <pubDate>Sat, 30 Jun 2018 01:51:34 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/neural-debugging/</guid>
+      <guid>https://blog.vasnetsov.com/posts/neural-debugging/</guid>
       <description>When training neural networks it can often be unclear why the network is not learning. Is it about learning parameters or NN architecture? Brute force search on full training dataset may be very time consuming even with GPU acceleration. If you need to write code on your laptop and run it on remote machine, it makes process even more painful. One way to solve this problem is to use synthetic datasets for debugging.</description>
     </item>
     
     <item>
       <title>Matching models</title>
-      <link>https://comprehension.ml/posts/nn-matching/</link>
+      <link>https://blog.vasnetsov.com/posts/nn-matching/</link>
       <pubDate>Wed, 27 Jun 2018 01:52:58 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/nn-matching/</guid>
+      <guid>https://blog.vasnetsov.com/posts/nn-matching/</guid>
       <description>A variety of deep matching models can be categorized into two types according to their architecture. One is the representation-focused model (pic. 1), which tries to build a good representation for a single text with a deep neural network, and then conducts matching between compressed text representations. Examples include DSSM, C-DSSM and ARC-I.
 The other is the interaction-focused model (pic. 2), which first builds local interactions (i.e., local matching signals) between two pieces of text, and then uses deep neural networks to learn hierarchical interaction patterns for matching.</description>
     </item>
     
     <item>
       <title>Matching Zoo</title>
-      <link>https://comprehension.ml/posts/matching-zoo/</link>
+      <link>https://blog.vasnetsov.com/posts/matching-zoo/</link>
       <pubDate>Thu, 25 Jan 2018 20:40:40 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/matching-zoo/</guid>
+      <guid>https://blog.vasnetsov.com/posts/matching-zoo/</guid>
       <description>As a starting point I used MatchZoo - a collection of text matching models https://github.com/faneshion/MatchZoo. It contains a set of model implementations in Keras as well as number of benchmark datasets. MatchZoo was created by authors of the main part of those models. It includes a lot of different examples, but configuration requires manual adjustment for each new task. I used MatchZoo implementation of CDSSM model as a baseline reference for my own implementation.</description>
     </item>
     
     <item>
       <title>Transfer learning in NLP</title>
-      <link>https://comprehension.ml/posts/nlp-transfer/</link>
+      <link>https://blog.vasnetsov.com/posts/nlp-transfer/</link>
       <pubDate>Wed, 24 Jan 2018 01:53:07 +0300</pubDate>
       
-      <guid>https://comprehension.ml/posts/nlp-transfer/</guid>
+      <guid>https://blog.vasnetsov.com/posts/nlp-transfer/</guid>
       <description>Sebastian Ruder wrote in his blog about perspectives of Neural Networks in NLP. He thinks that Few-Shot and Transfer learning will give huge impact in this area. I found his arguments convincing, so now I&amp;rsquo;m making experiments with Few-Shot learning. There are a lot of good datasets for Few-Shot learning problem in Computer Vision, e.g. Omniglot or any dataset for face recognition. The most closest analogue in NLP is Conversations and Question answering dataset.</description>
     </item>
     

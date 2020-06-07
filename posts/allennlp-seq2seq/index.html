@@ -16,7 +16,7 @@
       "@type" : "BlogPosting",
       "mainEntityOfPage": {
            "@type": "WebPage",
-           "@id": "https:\/\/comprehension.ml\/"
+           "@id": "https:\/\/blog.vasnetsov.com\/"
       },
       "articleSection" : "posts",
       "name" : "Allennlp Seq2seq",
@@ -31,7 +31,7 @@
       "copyrightYear" : "2018",
       "datePublished": "2018-12-28 01:48:45 \u002b0300 \u002b0300",
       "dateModified" : "2018-12-28 01:48:45 \u002b0300 \u002b0300",
-      "url" : "https:\/\/comprehension.ml\/posts\/allennlp-seq2seq\/",
+      "url" : "https:\/\/blog.vasnetsov.com\/posts\/allennlp-seq2seq\/",
       "wordCount" : "483",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
   }
@@ -54,7 +54,7 @@
 </style>
 
 
-<link rel="stylesheet" href="https://comprehension.ml/css/main.css">
+<link rel="stylesheet" href="https://blog.vasnetsov.com/css/main.css">
 
 
 
@@ -143,18 +143,18 @@
                     
                         <ul class="nav navbar-nav">
                             
-                                <li><a href="https://comprehension.ml/">Home</a></li>
+                                <li><a href="https://blog.vasnetsov.com/">Home</a></li>
                             
-                                <li><a href="https://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
+                                <li><a href="https://blog.vasnetsov.com/andrey_vasnetsov_cv.pdf">CV</a></li>
                             
-                                <li><a href="https://comprehension.ml/posts/">Posts</a></li>
+                                <li><a href="https://blog.vasnetsov.com/posts/">Posts</a></li>
                             
                         </ul>
                     
                     
                         <ul class="nav navbar-nav navbar-right">
                             
-                                <li class="navbar-icon"><a href="mailto:vasnetsov93&#43;blog@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                                <li class="navbar-icon"><a href="mailto:andrey&#43;blog@vasnetsov.com"><i class="fa fa-envelope-o"></i></a></li>
                             
                                 <li class="navbar-icon"><a href="https://github.com/generall"><i class="fa fa-github"></i></a></li>
                             
@@ -186,7 +186,7 @@ Implemented components could be used directly from code or for creating configs.
 <p>I have created a <a href="https://github.com/generall/allennlp_sandbox">repository</a> for my experiments. It contains a simple config file along with some accessory files. Let&rsquo;s take a <a href="https://github.com/generall/allennlp_sandbox/blob/master/allen_test_conf.json">look</a>.</p>
 <p>One of the main configuration parameters is a <code>model</code>.  The model determines what happens to the data and the network during training and forecasting. The model parameter itself is a class that derives from <code>allennlp.models.model.Model</code> and implements the <code>forward</code> method.
 We will use <a href="https://github.com/generall/allennlp_sandbox/blob/master/allen_test_conf.json#L12">simple_seq2seq</a> model which implements a basic sequence transformation scheme.</p>
-<p><img src="https://comprehension.ml/img/seq2seq.png" alt="seq2seq model"></p>
+<p><img src="https://blog.vasnetsov.com/img/seq2seq.png" alt="seq2seq model"></p>
 <p>In classical seq2seq the source sequence is transformed by Encoder into representation, which is then read by Decoder to generate the target sequence.
 <code>simple_seq2seq</code> module implements only Decoder. The Encoder should be implemented in other class, passed as a <a href="https://github.com/generall/allennlp_sandbox/blob/master/allen_test_conf.json#L23">model parameter</a>.
 We will use the simplest encoder option - LSTM.</p>

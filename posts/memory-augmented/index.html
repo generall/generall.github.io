@@ -16,7 +16,7 @@
       "@type" : "BlogPosting",
       "mainEntityOfPage": {
            "@type": "WebPage",
-           "@id": "https:\/\/comprehension.ml\/"
+           "@id": "https:\/\/blog.vasnetsov.com\/"
       },
       "articleSection" : "posts",
       "name" : "Memory Augmented",
@@ -31,7 +31,7 @@
       "copyrightYear" : "2019",
       "datePublished": "2019-02-15 01:48:18 \u002b0300 \u002b0300",
       "dateModified" : "2019-02-15 01:48:18 \u002b0300 \u002b0300",
-      "url" : "https:\/\/comprehension.ml\/posts\/memory-augmented\/",
+      "url" : "https:\/\/blog.vasnetsov.com\/posts\/memory-augmented\/",
       "wordCount" : "181",
       "keywords" : [ "NLP", "neural networks", "pytorch", "telegram", "engineering", "ML", "fasttext", "simaes networks", "BERT", "transformer", "word2vec", "deploy", "allennlp", "Blog" ]
   }
@@ -54,7 +54,7 @@
 </style>
 
 
-<link rel="stylesheet" href="https://comprehension.ml/css/main.css">
+<link rel="stylesheet" href="https://blog.vasnetsov.com/css/main.css">
 
 
 
@@ -143,18 +143,18 @@
                     
                         <ul class="nav navbar-nav">
                             
-                                <li><a href="https://comprehension.ml/">Home</a></li>
+                                <li><a href="https://blog.vasnetsov.com/">Home</a></li>
                             
-                                <li><a href="https://comprehension.ml/andrey_vasnetsov_cv.pdf">CV</a></li>
+                                <li><a href="https://blog.vasnetsov.com/andrey_vasnetsov_cv.pdf">CV</a></li>
                             
-                                <li><a href="https://comprehension.ml/posts/">Posts</a></li>
+                                <li><a href="https://blog.vasnetsov.com/posts/">Posts</a></li>
                             
                         </ul>
                     
                     
                         <ul class="nav navbar-nav navbar-right">
                             
-                                <li class="navbar-icon"><a href="mailto:vasnetsov93&#43;blog@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                                <li class="navbar-icon"><a href="mailto:andrey&#43;blog@vasnetsov.com"><i class="fa fa-envelope-o"></i></a></li>
                             
                                 <li class="navbar-icon"><a href="https://github.com/generall"><i class="fa fa-github"></i></a></li>
                             
@@ -178,7 +178,7 @@
 
         <div align="start" class="content"><p>Neural networks achieved great success at various NLP tasks, however, they are limited at handling infrequent patterns. In <a href="https://www.aclweb.org/anthology/D17-1146">this article</a>, the problem is described in the context of machine translation task.</p>
 <p>The authors noted that NMT is good at learning translation pairs that are frequently observed, but the system may ‘forget’ to use low-frequency pairs when they should be. In contrast, in traditional rule-based systems, low-frequency pairs cannot be smoothed out no matter how rare they are. One solution to this is combining both approaches.</p>
-<p><img src="https://comprehension.ml/img/mem_nmt.png" alt="mem_nmt"></p>
+<p><img src="https://blog.vasnetsov.com/img/mem_nmt.png" alt="mem_nmt"></p>
 <p>The authors propose to use a large external memory along with a selection mechanism to allow NN to use this memory. Selection fetches all relevant translation variants using words in source sentence and then an attention mechanism selects among these variants. After that neural net decides what source of prediction should be used on each translation step.</p>
 <p>The important thing is that the vectors for external memory were trained separately. That basically means that we can build knowledge bases for neural nets. That seems like a promising way to construct really large-scale models with huge capacity.</p>
 </div>
